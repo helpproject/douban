@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+	//分类管理
+	Route::controller('/admin/cate','CateController');

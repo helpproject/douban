@@ -25,3 +25,6 @@ Route::get('/', function () {
 	//标签管理
 	Route::controller('/admin/tag', 'TagController');
 
+	//标签管理
+	Route::controller('/admin/tag', 'TagController');
+

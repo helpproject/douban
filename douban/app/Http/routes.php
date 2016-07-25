@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller('/admin/user', 'UserController');
+Route::controller('/admin/attention', 'AttentionController');
+Route::controller('/admin/tag', 'TagController');

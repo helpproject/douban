@@ -15,5 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 	//分类管理
 	Route::controller('/admin/cate','CateController');
+	//用户管理
+	Route::controller('/admin/user', 'UserController');
+	//关注管理
+	Route::controller('/admin/attention', 'AttentionController');
+	//标签管理
+	Route::controller('/admin/tag', 'TagController');
+

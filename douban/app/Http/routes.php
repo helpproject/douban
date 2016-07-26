@@ -27,6 +27,11 @@ Route::get('/forget','UserController@forget');
 Route::post('/forget','UserController@doforget');
 Route::get('/reset','UserController@reset');
 Route::post('/reset','UserController@doreset');
+//账号管理
+Route::get('/account','UserController@account')->middleware('login');
+Route::post('/account','UserController@doaccount')->middleware('login');
+Route::get('/suicide','UserController@suicide')->middleware('login');
+Route::post('/suicide','UserController@dosuicide')->middleware('login');
 
 
 

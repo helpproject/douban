@@ -44,7 +44,7 @@ class UserController extends Controller
             'phone.regex'=>'手机号格式不正确',
             'city.required'=>'城市不能为空',
             'nickname.required' => '昵称不能为空',
-            'nickname.unique'=>'昵称格式不正确3-8位'
+            'nickname.regex'=>'昵称格式不正确3-8位'
         ]);
 
         $data = $request->only(['username','password','email','phone','city','nickname']);
@@ -129,7 +129,7 @@ class UserController extends Controller
             'phone.regex'=>'手机号格式不正确',
             'city.required'=>'城市不能为空',
             'nickname.required' => '昵称不能为空',
-            'nickname.unique'=>'昵称格式不正确2-8位'
+            'nickname.regex'=>'昵称格式不正确2-8位'
         ]);
 
         $data = $request->except(['_token','id']);
@@ -306,5 +306,68 @@ class UserController extends Controller
         }
     
     }
+
+    //前台更新
+
+    public function account(){
+        $id = session('uid');
+        $user = User::where('id',$id)->firstOrFail();
+        return view('index.user.account',[
+            'user'=>$user
+        ]);
+    }
+    
+   public function doaccount(Request $request){
+        $this->validate($request, [
+            'email'=>'regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+            'phone'=>'required|regex:/^1\d{10}$/',
+            'city'=>'required',
+            'nickname'=>'required|regex:/^\w{3,8}$/'
+
+        ],[
+            'email.regex'=>'邮箱的格式不正确',
+            'phone.required'=>'手机号不能为空',
+            'phone.regex'=>'手机号格式不正确',
+            'city.required'=>'城市不能为空',
+            'nickname.required' => '昵称不能为空',
+            'nickname.regex'=>'昵称格式不正确2-8位'
+        ]);
+
+        $data = $request->except(['_token','id']);
+
+        if($request->hasFile('profile')){
+            $profile = $this->getUploadFileName($request);
+            $data['profile'] = $profile?$profile:'';
+            $this->deleteProfile($request->input('id'));
+
+        }
+
+        $res = DB::table('users')->where('id',$request->input('id'))->update($data);
+        if($res) {
+            return back()->with('info','更新成功');
+        }else{
+            return back()->with('error','更新失败');
+        }
+   }
+    
+    public function suicide(){
+        $id = session('uid');
+        $user = User::where('id',$id)->firstOrFail();
+        return view('index.user.delete',[
+            'user'=>$user
+        ]);
+    }
+    
+    public function dosuicide(Request $request){
+        $user = User::findOrFail($request->input('id'));
+
+        if($user->delete()){
+            session(['uid'=>null]);
+            return redirect('/login')->with('info','删除成功');
+        }else{
+            return back()->with('error','删除失败');
+        }
+        }
+        
     
 }

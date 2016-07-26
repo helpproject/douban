@@ -194,5 +194,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
     ],
-
+    'upload_dir' =>'./uploads/'.date('Ymd').'/',
+    'upload_img_name'=>time().rand(1000000,9999999),
+    'APP_NAME' =>'豆瓣商城',
 ];

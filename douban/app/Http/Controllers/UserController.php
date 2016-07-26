@@ -175,4 +175,34 @@ class UserController extends Controller
             echo 0;die;
         }
     }
+
+
+    public function Login()
+    {   
+        return view('admin.login');
+    }
+
+    public function doLogin(LoginRequest $request)
+    {
+        $password = $request->input('password');
+        $info = user::where('username',$request->input('username'))->first();
+        // dd($info['password']);
+        if (Hash::check($password, $info['password'])) {
+            session(['uid'=>$info['id']]);
+            
+            $url = session('redirectUrl');
+            
+            if (!empty($url)) {
+                session(['redirectUrl'=> null]);
+                return redirect($url);
+
+            }
+
+            return redirect('/');
+        }else{
+
+            return back()->with('error','密码错误');
+        }
+        
+    }
 }

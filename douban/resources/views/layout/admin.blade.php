@@ -253,6 +253,13 @@
                     </ul>
                 </li>
                 <li>
+                    <a href="#"><i class="icon-list"></i> 作者管理</a>
+                    <ul class="closed">
+                        <li><a href="/admin/author/add">作者添加</a></li>
+                        <li><a href="/admin/author/index">作者列表</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="#"><i class="icon-list"></i> 关注管理</a>
                     <ul class="closed">
                         <li><a href="/admin/attention/add">关注添加</a></li>
@@ -266,6 +273,7 @@
                         <li><a href="/admin/good/index">商品列表</a></li>
                     </ul>
                 </li>
+                
             </ul>
         </div>
     </div>

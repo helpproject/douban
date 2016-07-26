@@ -12,14 +12,14 @@ class CreateTableAttentions extends Migration
      */
     public function up()
     {
-        Schema::create('attentions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('username')->connect('用户账号');
-            $table->string('attention_name')->index('关注id');
-            $table->tinyInteger('status')->comment('状态0下架1上架')->default(1);
-            $table->timestamps();
+        // Schema::create('attentions', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->string('username')->connect('用户账号');
+        //     $table->string('attention_name')->index('关注id');
+        //     $table->tinyInteger('status')->comment('状态0下架1上架')->default(1);
+        //     $table->timestamps();
 
-        });
+        // });
     }
 
     /**
@@ -29,6 +29,6 @@ class CreateTableAttentions extends Migration
      */
     public function down()
     {
-        Schema::drop('mattentions');
+        // Schema::drop('mattentions');
     }
 }

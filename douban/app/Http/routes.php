@@ -15,16 +15,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//后台登录页面
+Route::get('/admin/login','AdminController@login');
+Route::post('/admin/login','AdminController@doLogin');
 
-	//分类管理
-	Route::controller('/admin/cate','CateController');
+Route::group(['middleware'=>'login'],function(){
+	//后台首页
+	Route::get('/admin','AdminController@index');
 	//用户管理
 	Route::controller('/admin/user', 'UserController');
+	//分类管理
+	Route::controller('/admin/cate','CateController');
+	//作者管理
+	Route::controller('/admin/author','AuthorController');
 	//关注管理
 	Route::controller('/admin/attention', 'AttentionController');
 	//标签管理
 	Route::controller('/admin/tag', 'TagController');
-
-	//标签管理
-	Route::controller('/admin/tag', 'TagController');
-
+});

@@ -23,6 +23,10 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $table = 'users';
 
+<<<<<<< HEAD
+=======
+    public  $timestamps = false;
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
     /**
      * The attributes that are mass assignable.
      *

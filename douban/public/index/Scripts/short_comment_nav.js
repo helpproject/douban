@@ -1,0 +1,1 @@
+(function(){$(".nav-tab").delegate(".short-comment-tabs","click",function(b){b.preventDefault();var a=$(b.target);tab=a.data("tab");$(".comment-list").removeClass("show").addClass("noshow");$(".comment-list."+tab).addClass("show");$(".short-comment-tabs").removeClass("on-tab");$(a).addClass("on-tab")})})();

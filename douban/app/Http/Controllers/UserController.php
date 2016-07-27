@@ -7,6 +7,7 @@ use DB;
 use Hash;
 use Mail;
 use Config;
+use Image;
 use App\User;
 use App\Http\Requests;
 use App\Http\Requests\ZcRequest;
@@ -17,6 +18,7 @@ class UserController extends Controller
     //
     public function getAdd()
     {
+
     	return view('admin.user.add');
     }
 
@@ -74,7 +76,10 @@ class UserController extends Controller
             $fileName = $name.'.'.$suffix;
             $dir = './uploads/'.date('Ymd');
             if($request->file('profile')->move($dir,$fileName)){
-                $profile = trim($dir.'/'.$fileName,'.');
+                $profiles = ($dir.'/'.$fileName);
+               $img = Image::make($profiles)->resize(50,50)->save($profiles);
+                $profile = trim($img->dirname.'/'.$img->basename,'.');
+
                 return $profile;
             }
         }
@@ -91,6 +96,7 @@ class UserController extends Controller
                    $query->where('username','like','%'.$keywords.'%');
                }
            })
+           ->orderBy('id','desc')
        ->paginate($request->input('num',10));
 
         return view('admin.user.index', [
@@ -121,7 +127,6 @@ class UserController extends Controller
 
         ],[
             'username.required' => '用户名不能为空',
-            'username.unique'=>'用户名已经存在',
             'username.regex' => '用户名格式不正确',
             'email.required' => '邮箱不能为空',
             'email.regex'=>'邮箱的格式不正确',
@@ -162,6 +167,7 @@ class UserController extends Controller
     }
 
     public function getDelete(Request $request){
+        $this->deleteProfile($request->input('id'));
         if(DB::table('users')->where('id',$request->input('id'))->delete()){
             return back()->with('info', '删除成功');
         }else{
@@ -369,5 +375,20 @@ class UserController extends Controller
         }
         }
         
-    
+//    public function upimage(Request $request){
+//        $data = $request->except(['id']);
+//        if($request->hasFile('profile')){
+//            $profile = $this->getUploadFileName($request);
+//            $data['profile'] = $profile?$profile:'';
+//            $this->deleteProfile($request->input('id'));
+//
+//        }
+//        dd($request->hasFile('profile'));
+//        $res = DB::table('users')->where('id',$request->input('id'))->update($data);
+//        if($res) {
+//           echo '1';die;
+//        }else{
+//            echo '0';die;
+//        }
+//    }
 }

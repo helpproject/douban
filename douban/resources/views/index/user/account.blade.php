@@ -7,7 +7,7 @@
     <meta name="referrer" content="always">
 
     <title>
-        返世寻你的帐号
+        {{$user->nickname}}的帐号
     </title>
 
     <style>
@@ -59,7 +59,7 @@
             </div></div>
         <div class="clear"></div>
 
-        <form id="lzform" name="lzform" action="/account" method="post"><div style="display:none;"><input type="hidden"  value="UPr1"/></div>
+        <form id="lzform" name="lzform" action="/account" method="post" enctype="multipart/form-data"><div style="display:none;" ><input type="hidden"  value="UPr1"/></div>
 
 
 
@@ -76,7 +76,7 @@
 
 
 
-            <table style="clear:both" width="100%" align="center" cellpadding="5">
+            <table style="clear:both;" align="center" cellpadding="5" >
                 <tr>
                     <td class="m" valign="top" align="right">名　号: </td>
                     <td valign="top">
@@ -88,9 +88,8 @@
 
                 <tr><td class="m" valign="top" align="right">头　像:</td>
 
-                    <td valign="top"><img src="/index/Picture/u148026085-1.jpg" style="margin:10px;float:left"/>
-                        <div style="margin:10px;float:left"><img src="/index/Picture/ul148026085-1.jpg"/><br/>头像图标</div>
-                        <a href="/index/accounts/user_icon/"  style="margin:10px;float:left">更新</a></p>
+                    <td valign="top"><img src="{{$user->profile}}" style="margin:10px;float:left"/>
+                      <input iid="{{$user->id}}" type="file" id="img" name="profile" >
                         <br/><br/></td></tr>
 
 
@@ -165,7 +164,22 @@
                         var dlg=dui.Dialog();dlg.set({title:"选择你的常居地",url:"/j/misc/location_form",width:(/device-mobile/i).test(document.documentElement.className)?document.documentElement.offsetWidth*0.9:560,cache:true,callback:function(a,b){$(".selected .loc-type").each(function(){getLocations($(this))});$("body").delegate("a.habitable","click",function(c){c.preventDefault();if(where=="register"){$("#l_tabs").nextAll(".loading").show();$("input[name='loc']").val($(this).attr("id"));$("em#location").html("<strong>"+$(this).text()+"</strong>");$("em#location").next().html("重新选择");b.close();$(".loc-item .validate-error").hide()}else{$.post("/j/location/move",{loc:$(this).attr("id"),ck:get_cookie("ck")},function(d){if(d.r){b.close();window.location.reload()}else{alert("请求失败，请重试。")}})}});$("body").delegate("a.unhabitable, a.loc-type","click",function(f){f.preventDefault();var d=$.trim($(this).attr("id")).substring($.trim($(this).attr("id")).indexOf("_")+1);var c="#p_"+d;$("#l_tabs").nextAll(".loading").show();if($(this).hasClass("unhabitable")){getChildren($(this))}if($(this).hasClass("loc-type")){getLocations($(this))}$(this).parent().siblings("li.selected").removeClass("selected");$(this).parent().addClass("selected");$(c).siblings("div").remove();dlg.updateSize();dlg.updatePosition()})}});function getLocations(f){var e=f.attr("id");var c=$.trim(e).substring($.trim(e).indexOf("_")+1);var d="/j/location/"+c+"/";var b="p_"+c;var g=$("<div></div>").insertAfter(f.parent().parent()).attr("id",b);var a=$("<ul></ul>").appendTo(g).wrapAll("<div></div>");a.parent().addClass("panel");$.getJSON(d,function(i){$("#l_tabs").nextAll(".loading").hide();$.each(i.locations,function(k,j){var l=$('<a href="#"></a>');if(!j.habitable){l.addClass("unhabitable")}else{l.addClass("habitable")}l.text(j.name).attr({id:j.id,title:j.population+"人"}).appendTo(a).wrapAll("<li></li>");if(j.population<=100){l.parent().hide().addClass("off")}});$("<li></li>").css({display:"block",height:"10px"}).insertBefore(a.children("li.off:first"));if(a.children(".off").length){var h=$("<p></p>").addClass("expand");h.appendTo(a);$("<a></a>").appendTo(h).text("更多")}dlg.updateSize();dlg.updatePosition()})}function getChildren(f){var e=f.attr("id");var c=$.trim(e).substring($.trim(e).indexOf("_")+1);var d="/j/location/"+c+"/";var b="p_"+c;var g=$("<div></div>").insertAfter(f.parent().parent()).attr("id",b);var a=$("<ul></ul>").appendTo(g).wrapAll("<div></div>");a.parent().addClass("panel");$.getJSON(d,function(h){$("#l_tabs").nextAll(".loading").hide();$.each(h.locations,function(k,j){if(!j.has_child){alert("此地区不能作为常居地，请选择其他城市");g.remove();return false}$.each(j.children,function(m,l){var n=$('<a href="#"></a>');if(!l.habitable){n.addClass("unhabitable")}else{n.addClass("habitable")}n.text(l.name).attr({id:l.id,title:l.population+"人"}).appendTo(a).wrapAll("<li></li>")})});dlg.updateSize();dlg.updatePosition()})}$("body").delegate("p.expand a","click",function(a){a.preventDefault();$("li.off").show().addClass("on").removeClass("off");$(this).text("收起").parent().removeClass("expand").addClass("contract");dlg.updateSize();dlg.updatePosition()});$("body").delegate("p.contract a","click",function(a){a.preventDefault();$("li.on").hide().addClass("off").removeClass("on");$(this).text("更多").parent().removeClass("contract").addClass("expand");dlg.updateSize();dlg.updatePosition()});$("#edloc,#btnLocation").click(function(a){a.preventDefault();$(".loading").hide();dlg.open();dlg.updateSize();dlg.updatePosition()});
                     });
                 })();
+
+
             </script>
+            {{--<script>--}}
+
+                {{--$('#img').change(function(){--}}
+                    {{--var img = $('img').val();--}}
+                    {{--var val = $('input[name=file]');--}}
+                    {{--var id = $(this).attr('iid');--}}
+                    {{--$.get('/upimage',{'id':id,'profile':val},function(data){--}}
+                        {{--if(data == 1){--}}
+
+                        {{--}--}}
+                    {{--},'json')--}}
+                {{--})--}}
+            {{--</script>--}}
 
 
         </form>

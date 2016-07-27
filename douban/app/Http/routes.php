@@ -32,6 +32,7 @@ Route::get('/account','UserController@account')->middleware('login');
 Route::post('/account','UserController@doaccount')->middleware('login');
 Route::get('/suicide','UserController@suicide')->middleware('login');
 Route::post('/suicide','UserController@dosuicide')->middleware('login');
+Route::get('/upimage','UserController@upimage')->middleware('login');
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Comment;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -22,6 +23,7 @@ class CommentController extends Controller
         $comment->book_id = $request->input('book_id');
         $comment->pid = $request->input('pid');
         $comment->content = $request->input('content');
+
         if($comment->save())
         {
             return redirect('/admin/comment/')->with('info','添加成功');
@@ -47,7 +49,7 @@ class CommentController extends Controller
             })
             ->orderBy('user_id','desc')
             ->paginate($request->input('num',10));
-
+        
 
         return view('admin.comment.index', [
             'comment'=>$comment,

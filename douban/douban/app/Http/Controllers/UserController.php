@@ -103,8 +103,7 @@ class UserController extends Controller
 
         if(empty($info)){
             abort(404);
-        }
-
+        }        
         return view('admin.user.edit',['info'=>$info]);
     }
 

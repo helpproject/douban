@@ -18,7 +18,6 @@ class CreateAttentionsTable extends Migration
         //     $table->string('attention_name')->index('关注id');
         //     $table->tinyInteger('status')->comment('状态0下架1上架')->default(1);
         //     $table->timestamps();
-
         // });
     }
 

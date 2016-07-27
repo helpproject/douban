@@ -39,10 +39,11 @@
         </thead>
         <tbody role="alert" aria-live="polite" aria-relevant="all">
         @foreach($comment as $k=>$v)
+        
           <tr class="@if($k%2==0) even @else odd @endif">
             <td class=" sorting_1">{{$v->id}}</td>
             <td class=" ">{{$v->book_id}}</td>
-            <td class=" ">{{$v->user_id}}</td>
+            <td class=" ">{{$v->user->nickname}}</td>
             <td class=" ">{{$v->pid}}</td>
             <td class=" ">{{$v->content}}</td>
             <td class=" ">{{$v->status}}</td>

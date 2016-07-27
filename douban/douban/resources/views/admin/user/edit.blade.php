@@ -3,7 +3,7 @@
 @section('content')
     <div class="mws-panel grid_8">
         <div class="mws-panel-header">
-            <span>用户添加页面</span>
+            <span>用户修改页面</span>
         </div>
         <div class="mws-panel-body no-padding">
             @if (count($errors) > 0)
@@ -53,8 +53,8 @@
                         <div class="mws-form-row">
                             <label class="mws-form-label">头像</label>
                             <div class="mws-form-item">
-                                <img src="{{$info->profile}}" width="100" alt="">
-                                <input type="file" class="small" name="profile">
+                                <img src="{{$info->img}}" width="100" alt="">
+                                <input type="file" class="small" name="img">
                             </div>
                         </div>
                     </div>

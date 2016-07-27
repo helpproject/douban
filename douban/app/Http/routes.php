@@ -20,8 +20,29 @@ Route::get('/admin/login','AdminController@alogin');
 Route::post('/admin/login','AdminController@adoLogin');
 
 /*******  前台 ********/
+<<<<<<< HEAD
 	//分类页面
 	Route::get('/cate','CateController@index');
+=======
+Route::get('/login','UserController@login');
+Route::post('/login','UserController@dologin');
+//注册
+Route::get('/register','UserController@register');
+Route::post('/register','UserController@doregister');
+//激活
+Route::get('/jihuo','UserController@jihuo');
+//找回密码
+Route::get('/forget','UserController@forget');
+Route::post('/forget','UserController@doforget');
+Route::get('/reset','UserController@reset');
+Route::post('/reset','UserController@doreset');
+//账号管理
+Route::get('/account','UserController@account')->middleware('login');
+Route::post('/account','UserController@doaccount')->middleware('login');
+Route::get('/suicide','UserController@suicide')->middleware('login');
+Route::post('/suicide','UserController@dosuicide')->middleware('login');
+Route::get('/upimage','UserController@upimage')->middleware('login');
+>>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
 
 
 	Route::get('/login','UserController@login');

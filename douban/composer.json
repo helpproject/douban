@@ -6,12 +6,10 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-<<<<<<< HEAD
+
         "laravel/framework": "5.1.*",
+        "intervention/image": "2.3.7",
         "curl/curl": "1.4.0"
-=======
-        "laravel/framework": "5.1.*"
->>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -25,14 +23,12 @@
         ],
         "psr-4": {
             "App\\": "app/"
-<<<<<<< HEAD
+
         },
         "files": [
             "app/Common/function.php"
         ]
-=======
-        }
->>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+
     },
     "autoload-dev": {
         "classmap": [

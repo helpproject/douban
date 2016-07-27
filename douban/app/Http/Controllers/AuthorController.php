@@ -5,11 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AuthorInsertRequest;//作者插入表单验证
 use App\Author;
-use DB;
-
+use App\Http\Requests\InsertAuthorRuquest;
+use App\Http\Controllers\Controller;
 class AuthorController extends Controller
 {
     /**
@@ -17,7 +15,9 @@ class AuthorController extends Controller
      */
     public function getAdd()
     {
-        return view('admin.author.add');
+        return view('admin.author.add',[
+            'title'=>'作者添加',
+            ]);
     }
 
     /**
@@ -26,8 +26,8 @@ class AuthorController extends Controller
     public function postInsert(AuthorInsertRequest $request)
     {
         $authors = new Author;
-        $authors -> name = $request->input('name');
-        $authors -> book_id = $request->input('book_id');
+        $authors ->name = $request->input('name');
+        $authors ->book_id = $request->input('book_id');
         $authors ->abstract = $request->input('abstract');
 
         if($authors->save()){
@@ -51,13 +51,53 @@ class AuthorController extends Controller
                     // laravel框架限定
                     $query->where('name','like','%'.$keywords.'%');
                 }
-            })
+            }) 
+            ->orderBy('id','asc')
             ->paginate($request->input('num',10));
         return view('admin.author.index',[
             'title'=>'作者显示页面',
             'authors'=>$authors,
             'request'=>$request
             ]);
+    }
+
+
+    public function getEdit(Request $request)
+    {   
+        $authors = Author::find($request->input('id'));
+        // dd($info);
+        return view('/admin/author/edit',[
+            'authors'=>$authors,
+            'title'=>'作者修改页面',
+            ]);
+    }
+
+    public function postUpdate(InsertAuthorRuquest $request)
+    {
+        $data = $request->except(['id','_token']);
+        $authors = new Author;
+        $authors = Author::find($request->input('id'));
+        
+        foreach ($data as $key => $value) {
+            $authors->$key = $value;
+        }
+        // dd($authors);
+        if ($authors->save()) {
+            return redirect('admin/author/index')->with('info','修改成功');           
+        }else{
+            return back()->with('info','修改失败');
+        }
+    }
+
+    public function getDelete(Request $request)
+    {
+        $data = Author::findOrFail($request->input('id'));
+
+        if ($data->delete()) {
+            return back()->with('info','删除成功');
+        }else{
+            return back()->with('info','删除失败');
+        }
     }
 
      /**
@@ -74,51 +114,4 @@ class AuthorController extends Controller
         }
     }
 
-    /**
-     * 作者更改页面
-     */
-    public function getEdit(Request $request)
-    {
-        //获取id
-        $id = $request -> input('id');
-        //信息读取
-        $info = Author::findOrFail($id);
-        //显示模板
-        return view('admin.author.edit',[
-            'info'=>$info,
-            'title'=>'图书修改页面'
-            ]);
-    }
-
-    /**
-     * 作者更新页面
-     */
-    public function postUpdate(AuthorInsertRequest $request)
-    {
-        $authors = Author::find($request->input('id'));
-        $authors -> name = $request->input('name');
-        $authors -> book_id = $request->input('book_id');
-        $authors ->abstract = $request->input('abstract');
-
-        if($authors->save()){
-            return redirect('admin/author/index')->with('info','更新成功');
-        }else{
-            return back()->with('error','更新失败');
-        }
-    }
-
-    /**
-     * 删除图书
-     */
-    public function getDelete(Request $request)
-    {
-        $authors = Author::findOrFail($request->input('id'));
-
-        // 删除
-        if($authors->delete()){
-            return back()->with('info','删除成功');
-        }else{
-            return back()->with('error','删除失败');
-        }
-    }
 }

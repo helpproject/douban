@@ -186,6 +186,36 @@ class UserController extends Controller
     }
 
 
+
+    public function alogin()
+    {   
+        return view('admin.login');
+    }
+
+    public function adoLogin(LoginRequest $request)
+    {
+        $password = $request->input('password');
+        $info = user::where('username',$request->input('username'))->first();
+        // dd($info['password']);
+        if (Hash::check($password, $info['password'])) {
+            session(['uid'=>$info['id']]);
+            
+            $url = session('redirectUrl');
+            
+            if (!empty($url)) {
+                session(['redirectUrl'=> null]);
+                return redirect($url);
+
+            }
+
+            return redirect('/');
+        }else{
+
+            return back()->with('error','密码错误');
+        }
+        
+    }
+
     /**********  前台 *************/
 
     public function login(){
@@ -364,6 +394,9 @@ class UserController extends Controller
         ]);
     }
     
+<<<<<<< HEAD
+
+=======
     public function dosuicide(Request $request){
         $user = User::findOrFail($request->input('id'));
 
@@ -391,4 +424,5 @@ class UserController extends Controller
 //            echo '0';die;
 //        }
 //    }
+>>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
 }

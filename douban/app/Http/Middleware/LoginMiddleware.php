@@ -14,11 +14,17 @@ class LoginMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        if(session('uid')) {
+
+    {   
+        if (session('uid')) {
             return $next($request);
         }
-        session(['redirectUrl'=>$_SERVER['HTTP_REFERER']]);
-        return('/login');
+
+        session(['redirectUrl'=> isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null]);  
+        return redirect('/admin/login');
     }
+
+    
 }
+
+

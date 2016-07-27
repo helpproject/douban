@@ -31,7 +31,6 @@
         <thead>
           <tr role="row">
             <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 80px;">作者ID</th>
-            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 207px;">图书ID</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 100px;">作者姓名</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">作者简介</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">状态</th>
@@ -42,7 +41,6 @@
         @foreach($authors as $k=>$v)
           <tr class="@if($k%2==0) even @else odd @endif">
             <td class=" sorting_1">{{$v->id}}</td>
-            <td class=" ">{{$v->book_id}}</td>
             <td class=" ">{{$v->name}}</td>
             <td class=" "><textarea name="" id="" cols="10" rows="2" style="resize:none;">{{$v->abstract}}</textarea></td>
             <td class=" "><input cid="{{$v->id}}" class="ibutton" type="checkbox" @if($v->status) checked="checked" @endif></td>

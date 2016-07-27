@@ -15,24 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-//后台模板
-Route::get('/admin','Admincontroller@index');
-
-// 图书管理
-Route::controller('/admin/book','BookController');
-
-// 作者管理
-Route::controller('/admin/author','AuthorController');
-
-// 收货地址管理
-Route::controller('/admin/order','OrderController');
-// 获取省份的信息
-Route::get('/getProvince','OrderController@getProvince');
-// 获取市区的信息
-Route::get('/getCity','OrderController@getCity');
+//后台登录页面
+Route::get('/admin/login','AdminController@alogin');
+Route::post('/admin/login','AdminController@adoLogin');
 
 /*******  前台 ********/
+<<<<<<< HEAD
+	//分类页面
+	Route::get('/cate','CateController@index');
+=======
 Route::get('/login','UserController@login');
 Route::post('/login','UserController@dologin');
 //注册
@@ -51,20 +42,51 @@ Route::post('/account','UserController@doaccount')->middleware('login');
 Route::get('/suicide','UserController@suicide')->middleware('login');
 Route::post('/suicide','UserController@dosuicide')->middleware('login');
 Route::get('/upimage','UserController@upimage')->middleware('login');
+>>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
+
+
+	Route::get('/login','UserController@login');
+	Route::post('/login','UserController@dologin');
+	//注册
+	Route::get('/register','UserController@register');
+	Route::post('/register','UserController@doregister');
+	//激活
+	Route::get('/jihuo','UserController@jihuo');
+	//找回密码
+	Route::get('/forget','UserController@forget');
+	Route::post('/forget','UserController@doforget');
+	Route::get('/reset','UserController@reset');
+	Route::post('/reset','UserController@doreset');
 
 
 
-
+Route::group(['middleware'=>'login'],function(){
+	//后台首页
+	Route::get('/admin','AdminController@index');
+	//后台模板
+	Route::get('/admin','Admincontroller@index');
+	// 图书管理
+	Route::controller('/admin/book','BookController');
+	// 作者管理
+	Route::controller('/admin/author','AuthorController');
 	//分类管理
 	Route::controller('/admin/cate','CateController');
 	//用户管理
 	Route::controller('/admin/user', 'UserController');
+	//作者管理
+	Route::controller('/admin/author','AuthorController');
 	//关注管理
 	Route::controller('/admin/attention', 'AttentionController');
 	//标签管理
 	Route::controller('/admin/tag', 'TagController');
 
-	//标签管理
-	Route::controller('/admin/tag', 'TagController');
+	// 收货地址管理
+	Route::controller('/admin/order','OrderController');
+	// 获取省份的信息
+	Route::get('/getProvince','OrderController@getProvince');
+	// 获取市区的信息
+	Route::get('/getCity','OrderController@getCity');
 
+		
 
+});

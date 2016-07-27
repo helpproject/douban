@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\InsertCateRequest;
 use App\Http\Requests\UpdataCateRequest;
 use DB;
+use App\Cate;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class CateController extends Controller
 {
+
     // 快熟获取文章的分类信息
     public static function getAllCates()
     {
@@ -162,51 +164,63 @@ class CateController extends Controller
     	}
     }
 
-    public static function getCatesById($pid)
+
+    /*************** 前台 ****************/
+    public function index()
     {
-    	$cates = DB::table('cates')->where('pid',$pid)->get();
-
-    	$res = [];
-    	foreach($cates as $k=>$v){
-    		$v->subcate = self::getCatesById($v->id);
-    		$res[] = $v;
-    	}
-
-    	return $res;
-
+        return view('index.cate.index',[
+            'title'=>'分类浏览'
+            ]);
     }
 
-    public function getCates()
+    public static function getCatesByPid($pid)
     {
-    	if (!$this->cates) {
-    		$this->cates = DB::table('cates')->get();
-    	}
-    	return $this->cates;
+        //获取父级分类
+        $cates = DB::table('cates')->where('pid', $pid)->get();
+        $res = [];
+        foreach($cates as $k=>$v){
+            $v->subcate=self::getCatesByPid($v->id);
+            $res[] = $v;
+        }
+        return $res;
     }
 
-    public function getCatesByIdArr($pid)
-    {	
-    	$cates = [];
-    	$arr = $this->getCates();
-    	foreach ($arr as $k => $v) {
-    		if ($v->pid == $pid) {
-    			$cates[] = $v;
-    		}
-    	}
+    public static function getCates()
+    {
+        //声明成员属性
+        if(!$this->cates){
+            $this->cates = DB::table('cates')->get();
+        }
+        return $this->cates;
+    }
 
-    	$res = [];
-    	foreach ($cates as $k => $v) {
-    		$v->subcate = $this->getCatesByIdArr($v->id);
-    		$res[] = $v;
-    	}
+    public function getCatesByPidArr($pid)
+    {
+        //获取顶级分类
+        $cates = [];
+        //获取所有的分类
+        $allCates = $this->getCates();
+        foreach($allCates as $k=>$v){
+            if($v->pid == $pid){
+                $cates[] = $v;
+            }
+        }
 
-    	return $res;
+        $res = [];
+        foreach($cates as $k=>$v){
+            $v->subcate = $this->getCatesByPidArr($v->id);
+            $res[] = $v;
+        }
+        return $res;
     }
 
     public function getTest()
     {
-    	// $cates = $this->getCatesById(0);
-    	$cates = $this->getCatesByIdArr(0);
-    	dd($cates);
+        //通过搜索数据库来实现
+        // $cates = $this->getCatesByPid(0);
+
+        //通过数据数组来实现
+        $cates = $this->getCatesByPidArr(0);
+        dd($cates);
     }
 }

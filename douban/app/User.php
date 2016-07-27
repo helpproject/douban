@@ -24,7 +24,10 @@ class User extends Model implements AuthenticatableContract,
     protected $table = 'users';
 
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
     public  $timestamps = false;
 
     /**

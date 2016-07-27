@@ -14,6 +14,7 @@ class LoginMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
+
     {   
         if (session('uid')) {
             return $next($request);
@@ -25,3 +26,5 @@ class LoginMiddleware
 
     
 }
+
+

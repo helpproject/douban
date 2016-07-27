@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Hash;
+use Mail;
+use Config;
 use App\User;
 use App\Http\Requests;
+use App\Http\Requests\ZcRequest;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -34,7 +37,7 @@ class UserController extends Controller
             'password.required'=>'密码不能为空',
             'password.regex' => '密码格式不正确',
             'repassword.required'=>'确认密码不能为空',
-            'repassword.sama'=>'两次的密码不一致',
+            'repassword.same'=>'两次的密码不一致',
             'email.required' => '邮箱不能为空',
             'email.regex'=>'邮箱的格式不正确',
             'phone.required'=>'手机号不能为空',
@@ -177,12 +180,13 @@ class UserController extends Controller
     }
 
 
-    public function Login()
+
+    public function alogin()
     {   
         return view('admin.login');
     }
 
-    public function doLogin(LoginRequest $request)
+    public function adoLogin(LoginRequest $request)
     {
         $password = $request->input('password');
         $info = user::where('username',$request->input('username'))->first();
@@ -205,4 +209,133 @@ class UserController extends Controller
         }
         
     }
+
+    /**********  前台 *************/
+
+    public function login(){
+        return view('index.user.login');
+    }
+
+    public function dologin(Request $request){
+            $username = $request->input('username');
+            $password = $request->input('password');
+        
+        $info = User::where('username',$username)->first();
+        
+        if(empty($info)){
+            return back()->with('error','用户名不存在');
+        }
+        
+        if(Hash::check($password,$info['password'])){
+            //写入session  id
+            session(['uid'=>$info['id']]);
+            //登录后跳转的页面
+            $url = session('redirectUrl');
+            //判断是否有要跳转的页面 没有则默认首页
+            if(!empty($url)){
+                session(['redirectUrl'=>null]);
+                return redirect($url);
+            }
+            return redirect('/');
+        }else{
+            return back()->with('error','密码不对');
+        }
+    }
+
+    //注册
+
+    public function register(){
+        return view('index/user/register');
+    }
+
+    public function doregister(ZcRequest $request){
+            $user = new User();
+        $user->username = $request->input('username');
+        $user->password = Hash::make($request->input('password'));
+        $user->email = $request->input('email');
+        $user->nickname = $request->input('nickname');
+        $user->status = 0;
+        $user->token = str_random(50);
+        if($user->save()){
+            Mail::send('emails.register',['user'=>$user],function($m)use($user){
+                $m->from(env('MAIL_USERNAME'),Config::get('app.APP_NAME'));
+                $m->to($user->email)->subject('用户激活');
+            });
+        }
+        return view('index.user.registerRemind');
+    }
+    
+    //激活
+    
+    public function jihuo(Request $request){
+        $info = User::findOrFail($request->input('id'));
+        if($info->token == $request->input('token')){
+            $info->status = 1;
+            $info->token = str_random(50);
+            if($info->save()){
+                return redirect('/login');
+            }
+        }else{
+            abort(404);
+        }
+        
+    }
+    
+    //修改密码
+    
+    public function forget(Request $request){
+        return view('index.user.forget');
+    }
+    
+    public function doforget(Request $request){
+
+        $this->validate($request,[
+            'email'=>'exists:users,email|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
+
+
+        ],[
+            'email.exists'=>'邮箱不存在',
+            'email.regex' => '邮箱格式不正确',
+
+        ]);
+        $info = User::where('email',$request->input('email'))->firstOrFail();
+
+        Mail::send('emails.forgect', ['info'=> $info], function($m)use($info){
+            $m->from(env('MAIL_USERNAME'), Config::get('app.APP_NAME'));
+            $m->to($info->email)->subject('找回密码邮件');
+        });
+    }
+    
+    public function reset(Request $request){
+        $user = User::where('id',$request->input('id'))->where('token',$request->input('token'))->firstOrFail();
+        return view('index.user.reset',[
+            'user'=>$user
+        ]);
+    }
+    
+    public function doreset(Request $request){
+        $this->validate($request,[
+            'password'=>'required|regex:/^\S{6,30}$/',
+            'repassword'=>'required|same:password',
+           
+        ],[
+            'password.required'=>'密码不能为空',
+            'password.regex' => '密码格式不正确',
+            'repassword.required'=>'确认密码不能为空',
+            'repassword.same'=>'两次的密码不一致',
+           
+        ]);
+        $user = User::where('id',$request->input('id'))->where('token',$request->input('token'))->firstOrFail();
+        
+        $user->password = Hash::make($request->input('password'));
+        $user->token = str_random(50);
+        if($user->save()) {
+            return redirect('/login')->with('info','更新成功');
+        }else{
+            return back();
+        }
+    
+    }
+    
+
 }

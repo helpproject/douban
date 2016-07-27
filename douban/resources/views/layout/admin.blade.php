@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -253,13 +252,6 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#"><i class="icon-list"></i> 作者管理</a>
-                    <ul class="closed">
-                        <li><a href="/admin/author/add">作者添加</a></li>
-                        <li><a href="/admin/author/index">作者列表</a></li>
-                    </ul>
-                </li>
-                <li>
                     <a href="#"><i class="icon-list"></i> 关注管理</a>
                     <ul class="closed">
                         <li><a href="/admin/attention/add">关注添加</a></li>
@@ -273,7 +265,30 @@
                         <li><a href="/admin/good/index">商品列表</a></li>
                     </ul>
                 </li>
-                
+
+                <li>
+                    <a href="#"><i class="icon-book"></i> 图书管理</a>
+                    <ul class="closed">
+                        <li><a href="/admin/book/add">图书添加</a></li>
+                        <li><a href="/admin/book/index">图书列表</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="icon-official"></i> 作者管理</a>
+                    <ul class="closed">
+                        <li><a href="/admin/author/add">作者添加</a></li>
+                        <li><a href="/admin/author/index">作者列表</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#"><i class="icon-home"></i> 地址管理</a>
+                    <ul class="closed">
+                        <li><a href="/admin/order/add">地址添加</a></li>
+                        <li><a href="/admin/order/index">地址列表</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

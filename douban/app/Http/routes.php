@@ -16,20 +16,56 @@ Route::get('/', function () {
 });
 
 //后台登录页面
-Route::get('/admin/login','AdminController@login');
-Route::post('/admin/login','AdminController@doLogin');
+Route::get('/admin/login','AdminController@alogin');
+Route::post('/admin/login','AdminController@adoLogin');
+
+/*******  前台 ********/
+	//分类页面
+	Route::get('/cate','CateController@index');
+
+
+	Route::get('/login','UserController@login');
+	Route::post('/login','UserController@dologin');
+	//注册
+	Route::get('/register','UserController@register');
+	Route::post('/register','UserController@doregister');
+	//激活
+	Route::get('/jihuo','UserController@jihuo');
+	//找回密码
+	Route::get('/forget','UserController@forget');
+	Route::post('/forget','UserController@doforget');
+	Route::get('/reset','UserController@reset');
+	Route::post('/reset','UserController@doreset');
+
+
 
 Route::group(['middleware'=>'login'],function(){
 	//后台首页
 	Route::get('/admin','AdminController@index');
-	//用户管理
-	Route::controller('/admin/user', 'UserController');
+	//后台模板
+	Route::get('/admin','Admincontroller@index');
+	// 图书管理
+	Route::controller('/admin/book','BookController');
+	// 作者管理
+	Route::controller('/admin/author','AuthorController');
 	//分类管理
 	Route::controller('/admin/cate','CateController');
+	//用户管理
+	Route::controller('/admin/user', 'UserController');
 	//作者管理
 	Route::controller('/admin/author','AuthorController');
 	//关注管理
 	Route::controller('/admin/attention', 'AttentionController');
 	//标签管理
 	Route::controller('/admin/tag', 'TagController');
+
+	// 收货地址管理
+	Route::controller('/admin/order','OrderController');
+	// 获取省份的信息
+	Route::get('/getProvince','OrderController@getProvince');
+	// 获取市区的信息
+	Route::get('/getCity','OrderController@getCity');
+
+		
+
 });

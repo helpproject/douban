@@ -4,8 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+
     "hash": "4c53896279652d7cf982d33382132d67",
     "content-hash": "d75876b969dc1b8adfc114bc355478d5",
+
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -62,6 +64,63 @@
             "time": "2015-11-09 22:51:51"
         },
         {
+
+            "name": "curl/curl",
+            "version": "1.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-mod/curl.git",
+                "reference": "38fc139f0e73149911a5765249e9900b9c70d5fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://packagist.phpcomposer.com/files/php-mod/curl/38fc139f0e73149911a5765249e9900b9c70d5fc.zip",
+                "reference": "38fc139f0e73149911a5765249e9900b9c70d5fc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Curl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hassan Amouhzi",
+                    "email": "hassan@anezi.net",
+                    "homepage": "http://hassan.amouhzi.com"
+                },
+                {
+                    "name": "php-curl-class",
+                    "homepage": "https://github.com/php-curl-class"
+                },
+                {
+                    "name": "user52",
+                    "homepage": "https://github.com/user52"
+                }
+            ],
+            "description": "cURL class for PHP",
+            "homepage": "https://github.com/php-mod/curl",
+            "keywords": [
+                "curl",
+                "dot"
+            ],
+            "time": "2016-06-04 18:16:12"
+        },
+        {
+
             "name": "danielstjules/stringy",
             "version": "1.10.0",
             "source": {
@@ -613,6 +672,10 @@
         },
         {
             "name": "league/flysystem",
+<<<<<<< HEAD
+            "version": "1.0.25",
+=======
+<<<<<<< HEAD
             "version": "1.0.25",
             "source": {
                 "type": "git",
@@ -623,6 +686,24 @@
                 "type": "zip",
                 "url": "https://packagist.phpcomposer.com/files/thephpleague/flysystem/a76afa4035931be0c78ca8efc6abf3902362f437.zip",
                 "reference": "a76afa4035931be0c78ca8efc6abf3902362f437",
+=======
+            "version": "1.0.24",
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thephpleague/flysystem.git",
+                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437"
+            },
+            "dist": {
+                "type": "zip",
+<<<<<<< HEAD
+                "url": "https://packagist.phpcomposer.com/files/thephpleague/flysystem/a76afa4035931be0c78ca8efc6abf3902362f437.zip",
+                "reference": "a76afa4035931be0c78ca8efc6abf3902362f437",
+=======
+                "url": "https://packagist.phpcomposer.com/files/thephpleague/flysystem/9aca859a303fdca30370f42b8c611d9cf0dedf4b.zip",
+                "reference": "9aca859a303fdca30370f42b8c611d9cf0dedf4b",
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
                 "shasum": ""
             },
             "require": {
@@ -635,7 +716,15 @@
                 "ext-fileinfo": "*",
                 "mockery/mockery": "~0.9",
                 "phpspec/phpspec": "^2.2",
+<<<<<<< HEAD
                 "phpunit/phpunit": "~4.8"
+=======
+<<<<<<< HEAD
+                "phpunit/phpunit": "~4.8"
+=======
+                "phpunit/phpunit": "~4.8 || ~5.0"
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -692,7 +781,15 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< HEAD
             "time": "2016-07-18 12:22:57"
+=======
+<<<<<<< HEAD
+            "time": "2016-07-18 12:22:57"
+=======
+            "time": "2016-06-03 19:11:39"
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
         },
         {
             "name": "monolog/monolog",
@@ -2499,6 +2596,10 @@
         },
         {
             "name": "phpspec/phpspec",
+<<<<<<< HEAD
+            "version": "2.5.1",
+=======
+<<<<<<< HEAD
             "version": "2.5.1",
             "source": {
                 "type": "git",
@@ -2509,6 +2610,24 @@
                 "type": "zip",
                 "url": "https://packagist.phpcomposer.com/files/phpspec/phpspec/531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d.zip",
                 "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
+=======
+            "version": "2.5.0",
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/phpspec.git",
+                "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d"
+            },
+            "dist": {
+                "type": "zip",
+<<<<<<< HEAD
+                "url": "https://packagist.phpcomposer.com/files/phpspec/phpspec/531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d.zip",
+                "reference": "531d00ee76e9ae98279ed4dbb2419e5e0f7fb82d",
+=======
+                "url": "https://packagist.phpcomposer.com/files/phpspec/phpspec/385ecb015e97c13818074f1517928b24d4a26067.zip",
+                "reference": "385ecb015e97c13818074f1517928b24d4a26067",
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
                 "shasum": ""
             },
             "require": {
@@ -2526,7 +2645,15 @@
             },
             "require-dev": {
                 "behat/behat": "^3.0.11",
+<<<<<<< HEAD
                 "ciaranmcnulty/versionbasedtestskipper": "^0.2.1",
+=======
+<<<<<<< HEAD
+                "ciaranmcnulty/versionbasedtestskipper": "^0.2.1",
+=======
+                "bossa/phpspec2-expect": "~1.0",
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
                 "phpunit/phpunit": "~4.4",
                 "symfony/filesystem": "~2.1|~3.0"
             },
@@ -2539,7 +2666,15 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "2.5.x-dev"
+=======
+<<<<<<< HEAD
+                    "dev-master": "2.5.x-dev"
+=======
+                    "dev-master": "2.2.x-dev"
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
                 }
             },
             "autoload": {
@@ -2573,7 +2708,15 @@
                 "testing",
                 "tests"
             ],
+<<<<<<< HEAD
             "time": "2016-07-16 08:34:07"
+=======
+<<<<<<< HEAD
+            "time": "2016-07-16 08:34:07"
+=======
+            "time": "2016-03-20 20:34:32"
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
         },
         {
             "name": "phpspec/prophecy",
@@ -2882,6 +3025,10 @@
         },
         {
             "name": "phpunit/phpunit",
+<<<<<<< HEAD
+            "version": "4.8.27",
+=======
+<<<<<<< HEAD
             "version": "4.8.27",
             "source": {
                 "type": "git",
@@ -2892,6 +3039,24 @@
                 "type": "zip",
                 "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/phpunit/c062dddcb68e44b563f66ee319ddae2b5a322a90.zip",
                 "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90",
+=======
+            "version": "4.8.26",
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90"
+            },
+            "dist": {
+                "type": "zip",
+<<<<<<< HEAD
+                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/phpunit/c062dddcb68e44b563f66ee319ddae2b5a322a90.zip",
+                "reference": "c062dddcb68e44b563f66ee319ddae2b5a322a90",
+=======
+                "url": "https://packagist.phpcomposer.com/files/sebastianbergmann/phpunit/fc1d8cd5b5de11625979125c5639347896ac2c74.zip",
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74",
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
                 "shasum": ""
             },
             "require": {
@@ -2950,7 +3115,15 @@
                 "testing",
                 "xunit"
             ],
+<<<<<<< HEAD
             "time": "2016-07-21 06:48:14"
+=======
+<<<<<<< HEAD
+            "time": "2016-07-21 06:48:14"
+=======
+            "time": "2016-05-17 03:09:28"
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
+>>>>>>> 64dc605348dc1776b3da62a5cd6e13a95a0ef667
         },
         {
             "name": "phpunit/phpunit-mock-objects",

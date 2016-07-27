@@ -14,6 +14,24 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//后台模板
+Route::get('/admin','Admincontroller@index');
+
+// 图书管理
+Route::controller('/admin/book','BookController');
+
+// 作者管理
+Route::controller('/admin/author','AuthorController');
+
+// 收货地址管理
+Route::controller('/admin/order','OrderController');
+// 获取省份的信息
+Route::get('/getProvince','OrderController@getProvince');
+// 获取市区的信息
+Route::get('/getCity','OrderController@getCity');
+
 /*******  前台 ********/
 Route::get('/login','UserController@login');
 Route::post('/login','UserController@dologin');
@@ -48,4 +66,5 @@ Route::get('/upimage','UserController@upimage')->middleware('login');
 
 	//标签管理
 	Route::controller('/admin/tag', 'TagController');
+
 

@@ -38,9 +38,7 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
-
-    'timezone' => 'UTC',
-
+    'timezone' => 'PRC',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -195,7 +193,11 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class
     ],
-    'upload_dir' =>'./uploads/'.date('Ymd').'/',
-    'upload_img_name'=>time().rand(1000000,9999999),
-    'APP_NAME' =>'豆瓣商城',
+
+
+    // 自定义配置
+    'upload_dir' => './uploads/'.date('Ymd').'/',
+    'upload_img_name' => time().rand(100000,999999),
+    'APP_NAME' => '144商城'
+
 ];

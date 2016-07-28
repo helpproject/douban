@@ -139,6 +139,8 @@
       } (document);</script>
     <link href="/index/Css/master.css" rel="stylesheet" type="text/css">
     <style type="text/css"></style>
+    <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
+
     <script>var _head_start = new Date();</script>
     <script>define.config({
         'ui/slide': 'Book.slide',
@@ -367,9 +369,7 @@
         }
       } < /a></li > </script>
     <div id="wrapper">
-      <!-- douban ad begin -->
-      <div id="dale_book_home_top_super_banner" class="ad-placeholder" style="margin: -18px 0 18px;"></div>
-      <!-- douban ad end -->
+
       @section('content')
       <div id="content">
         <div class="grid-16-8 clearfix">
@@ -2707,3 +2707,5 @@
     <!-- dis6-docker--></body>
 
 </html>
+@section('myJs')
+@show

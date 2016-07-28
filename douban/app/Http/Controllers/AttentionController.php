@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Attention;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -70,6 +71,40 @@ class AttentionController extends Controller
             return back()->with('info','删除成功');
         }else{
             return back()->with('error','删除失败');
+        }
+    }
+    /******* 前台 **********/
+    public function show(Request $request){
+        $id = session('uid');
+        $user = User::where('id',$id)->firstOrFail();
+        $username =  $user->username;
+        $users = User::where('id',$request->input('id'))->firstOrFail();
+        $attention_name = $users->username;
+
+        $attention = new Attention;
+
+        $attention->username = $username;
+        $attention->attention_name = $attention_name;
+        $attention->status = 1;
+
+
+        if( $attention->save()){
+            return 1;
+        }else{
+            return 0;
+        }
+
+    }
+
+    public function delete(Request $request){
+        $id = session('uid');
+        $user = User::where('id',$id)->firstOrFail();
+        $username =  $user->username;
+        $users = User::where('id',$request->input('id'))->firstOrFail();
+        $attention_name = $users->username;
+        $attention = Attention::where('username',$username)->where('attention_name',$attention_name)->first();
+        if($attention->delete()){
+            return 1;
         }
     }
 }

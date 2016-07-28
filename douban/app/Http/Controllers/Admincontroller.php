@@ -21,12 +21,12 @@ class AdminController extends Controller
     	return view('admin.index',['title'=>'豆瓣后台']);
     }
 
-    public function Login()
+    public function Alogin()
     {
     	return view('admin.login');
     }
 
-    public function DoLogin(Request $request)
+    public function AdoLogin(Request $request)
     {	
 
     	$username = $request->input('username');

@@ -8,6 +8,7 @@ use Hash;
 use Mail;
 use Config;
 use Image;
+use App\Attention;
 use App\User;
 use App\Http\Requests;
 use App\Http\Requests\ZcRequest;
@@ -393,10 +394,7 @@ class UserController extends Controller
             'user'=>$user
         ]);
     }
-    
-<<<<<<< HEAD
 
-=======
     public function dosuicide(Request $request){
         $user = User::findOrFail($request->input('id'));
 
@@ -408,6 +406,39 @@ class UserController extends Controller
         }
         }
         
+    
+    
+    
+    public function Mine($id){
+        $user = User::findOrFail($id);
+        $iid = session('uid');
+        $usera = User::where('id',$iid)->firstOrFail();
+        $username =  $usera->username;
+        $attention = Attention::where('username',$username)->where('attention_name',$user->username)->first();
+       
+        if(empty($attention)){
+          $c = 1;
+        }
+        else{
+            $c = 2;
+        }
+
+//
+//        $attention = Attention::where('username',$username)->get();
+//
+//        $a = $attention->where('attention_name',$user->username)->first();
+
+
+//        $img = Image::make('.'.$user->profile)->resize(300,300)->;
+//        $attention = Attention::where('username',$user->username)->where()
+        return view('/index/user/mine',[
+            'user'=>$user,
+            'c'=>$c,
+//            'usera'=>$usera,
+//            'a'=>$a
+        ]);
+        
+    }
 //    public function upimage(Request $request){
 //        $data = $request->except(['id']);
 //        if($request->hasFile('profile')){
@@ -424,5 +455,5 @@ class UserController extends Controller
 //            echo '0';die;
 //        }
 //    }
->>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
+
 }

@@ -27,7 +27,7 @@ class AdminController extends Controller
     }
 
     public function AdoLogin(Request $request)
-    {	
+    {
 
     	$username = $request->input('username');
     	$password = $request->input('password');
@@ -47,7 +47,7 @@ class AdminController extends Controller
     }
 
     public function cc()
-    {	
+    {
     	//无插件抓取
 	        $url = 'https://book.douban.com/subject/26817186/?icn=index-editionrecommend';
 
@@ -62,13 +62,13 @@ class AdminController extends Controller
 	        preg_match_all('/内容简介.*class="intro">(.*)<\/div>/isU',$str,$intro);
 	        preg_match_all('/id="dir_26817186_full" style="display:none">(.*)\(<a/isU', $str, $list);
 	        preg_match_all('/试读<\/span>.*<p>(.*)<\/p>/isU',$str,$content);
-	        
+
 	        if (!empty($img)) {
 
 	        	$path = './download/images/'.basename($img[1][0]);
 		 		file_put_contents($path, $img[1]);
 	        }
-	        
+
 
 	        $books = new Book;
 	        $books->title = $title[1][0];

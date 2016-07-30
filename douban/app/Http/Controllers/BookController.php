@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use DB;
 use Config;
+use Image;
 use App\Http\Requests;
 use App\Books;
 use App\Cate;
+use App\Bk_ar;
+use App\Author;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GoodsInsertCateRequest;
 class BookController extends Controller
@@ -18,7 +21,10 @@ class BookController extends Controller
      */
     public function getAdd()
     {
-        return view('admin.book.add');
+        $cates = CateController::getAllCates();
+        return view('admin.book.add',[
+            'cates' => $cates
+            ]);
     }
 
     /**
@@ -44,11 +50,12 @@ class BookController extends Controller
                 $img = $request->file('img');
                 $name = time().rand(100000,999999).'.'.$img->getClientOriginalExtension();
                 $img->move($dir, $name);
-                //修改图片的路径 
-                $images = trim($dir.$name,'.');
+                $profiles = ($dir.'/'.$name);
+                $img = Image::make($profiles)->resize(50,50)->save($profiles);
+                $profile = trim($img->dirname.'/'.$img->basename,'.');
         }
 
-        $books -> img = $images;
+        $books -> img = $profile;
        
         if($books->save()){
             return redirect('admin/book/index')->with('info','添加成功');
@@ -123,7 +130,6 @@ class BookController extends Controller
         $books -> price = $request->input('price');
         $books -> cate_id = $request->input('cate_id');
         $books -> intro = $request->input('intro');
-        $books -> author = $request->input('author');
         $books -> catalog = $request->input('catalog');
         $books -> ISBN = $request->input('ISBN');
 
@@ -197,5 +203,37 @@ class BookController extends Controller
         }
     }
 
+    /*****************  前台操作  *********************/
+
+    public function show($id)
+    {
+        //读取图书的详细信息
+        $books = Books::find($id);
+        $author_id = $books->bk_ar->author_id;
+        $author = Author::where('id',$author_id)->firstOrFail();
+        //解析模板
+        return view('index.book.detail',[
+            'books'=>$books,
+            'author'=>$author
+            ]);
+    }
+
+    public function tag($id)
+    {
+        //读取分类下图书的信息
+        $books = Books::where('cate_id',$id)->simplePaginate(10);
+        //读取分类
+        $cate = Cate::where('id',$id)->firstOrFail();
+        //读取作者信息
+        // $author_id = $books->bk_ar->author_id;
+        // dd($author_id);
+        // dd($cate);
+        //解析模板
+        return view('index.book.tag',[
+            'title'=>'豆瓣图书列表',
+            'books'=>$books,
+            'cate'=>$cate,
+            ]);
+    }
  
 }

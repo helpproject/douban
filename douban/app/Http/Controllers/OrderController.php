@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Area;
 use App\Order;
+use App\Books;
+use Config;
+use App\OrderGoods;
 use DB;
 use App\Http\Requests\OrderControllerRequest;// 地址插入验证
 use App\Http\Controllers\Controller;
@@ -160,4 +163,68 @@ class OrderController extends Controller
             return back()->with('error','删除失败');
         }
     }
+
+    //添加订单
+    public function create(Request $request)
+    {
+        // dd($request->all());
+        //将信息插入到订单表中
+        $order = new Order;
+        $order -> num = time().rand(1000000,9999999);
+        $order -> user_id = session('uid');
+        $order -> addresse_id = $request->input('addresse_id');
+        $order -> total = $request->input('total');
+        $order -> paytype = $request->input('paytype');
+        $order -> status = 0;
+        
+        $cart = $request->input('cart');
+        // dd($cart);
+        if ($order->save()) {
+            foreach ($cart as $key => $value) {
+                $orderGoods = new OrderGoods;
+                $orderGoods -> order_id = $order -> id;
+                $orderGoods -> book_id = $value['id'];
+                $orderGoods -> total = $request->input('total');
+                $orderGoods -> save();
+            }
+        }
+        return redirect('http://pay.xiaohigh.com/api/deal?to=xiaohigh@163.com&money='.$order->total.'&order_id='.$order->id.'&info='.config::get('app.APP_NAME').'商品购买&return_url=http://www.db.com/Order/changeStatus');
+    }
+
+
+    public function changeStatus(Request $request)
+    {
+        //获取参数
+        $status= $request->input('status');
+        $order_id = $request->input('order_id');
+
+        if ($status == '00') {
+            //读取信息
+            $order = Order::find($order_id);
+            // 更新字段
+            $order -> status = 1;
+
+            if ($order -> save()) {
+                return view('index.order.reminder');
+            }
+        }
+    }
+
+    public function ordercart()
+    {   
+        $uid = session('uid');
+        $orderId = Order::where('user_id',$uid)->select('id')->get();
+        $orderGoodsId = [];
+        foreach ($orderId as $key => $value) {
+            echo '<pre>';
+            var_dump($value);
+            $orderGoodsId[] = OrderGoods::where('order_id',$value)->select('book_id')->get();
+
+        }
+        // dd($orderGoodsId);
+        return view('index.cart.ordercart',[
+            
+            ]);       
+    }
+
 }

@@ -258,13 +258,6 @@
                         <li><a href="/admin/attention">关注列表</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#"><i class="icon-list"></i> 商品管理</a>
-                    <ul class="closed">
-                        <li><a href="/admin/good/add">商品添加</a></li>
-                        <li><a href="/admin/good/index">商品列表</a></li>
-                    </ul>
-                </li>
 
                 <li>
                     <a href="#"><i class="icon-book"></i> 图书管理</a>

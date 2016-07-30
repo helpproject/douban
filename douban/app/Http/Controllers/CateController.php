@@ -7,6 +7,7 @@ use App\Http\Requests\InsertCateRequest;
 use App\Http\Requests\UpdataCateRequest;
 use DB;
 use App\Cate;
+use App\Books;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -172,6 +173,14 @@ class CateController extends Controller
             'title'=>'分类浏览'
             ]);
     }
+
+    public function hot()
+    {
+        return view('index.cate.hot',[
+            'title'=>'热门分类'
+            ]);
+    }
+
 
     public static function getCatesByPid($pid)
     {

@@ -43,8 +43,10 @@
         <div class="grid-16-8 clearfix">
           <div class="article">
             <div class="tag-view-type clearfix">
-              <span class="rr greyinput">分类浏览 /
-                <a href="/cate/hot">所有热门标签</a></span>
+              <span class="rr greyinput">
+                  <a href="/cate">分类浏览</a> /
+                  所有热门标签
+              </span>
             </div>
             <div class="">
               @foreach($cates as $k=>$v)

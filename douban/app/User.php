@@ -11,8 +11,8 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+                                    AuthorizableContract,
+                                    CanResetPasswordContract
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
@@ -24,10 +24,6 @@ class User extends Model implements AuthenticatableContract,
     protected $table = 'users';
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
     public  $timestamps = false;
 
     /**

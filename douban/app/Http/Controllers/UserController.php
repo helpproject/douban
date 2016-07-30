@@ -193,7 +193,8 @@ class UserController extends Controller
     }
 
     public function adoLogin(LoginRequest $request)
-    {
+    {   
+        
         $password = $request->input('password');
         $info = user::where('username',$request->input('username'))->first();
         // dd($info['password']);
@@ -394,9 +395,7 @@ class UserController extends Controller
         ]);
     }
     
-<<<<<<< HEAD
 
-=======
     public function dosuicide(Request $request){
         $user = User::findOrFail($request->input('id'));
 
@@ -424,5 +423,5 @@ class UserController extends Controller
 //            echo '0';die;
 //        }
 //    }
->>>>>>> 637b9ab913721b5d89b84ac8054ccc4a2f41b0f9
+
 }

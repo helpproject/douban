@@ -17,20 +17,14 @@
                 <ul class="nav-list">
 
                     <li class="user-profile-nav-activated">读书主页</li>
+                    @if($user->id == session('uid'))
+                        <li><a href="/zaidu/{{$user->id}}">在读</a></li>
 
-                    <li><a href="/people/148026085/reviews">书评</a></li>
+                        <li><a href="/wodu/{{$user->id}}">想读</a></li>
 
-                    <li><a href="/people/148026085/annotation/">笔记</a></li>
+                        <li><a href="/duguo/{{$user->id}}">读过</a></li>
+                    @endif
 
-                    <li><a href="/people/148026085/do">在读</a></li>
-
-                    <li><a href="/people/148026085/wish">想读</a></li>
-
-                    <li><a href="/people/148026085/collect">读过</a></li>
-
-                    <li><a href="https://www.douban.com/people/148026085/doulists">豆列</a></li>
-                    <li><a href="/settings/">设置</a></li>
-                    <li class="user-profile-nav-splitter">|</li>
                     <li><a href="https://www.douban.com/people/148026085/">豆瓣主页</a></li>
                 </ul>
             </div>
@@ -45,6 +39,8 @@
 
 
                 </div>
+
+                @if(!empty($ibook))
                 <div id="db-book-mine">
 
 
@@ -55,7 +51,7 @@
                             <span class="">想读</span>
                             &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
                             <span class="pl">&nbsp;(
-          <a href="https://book.douban.com/people/148026085/wish">1本</a>
+          <a href="https://book.douban.com/people/148026085/wish">{{count($ibook)}}本</a>
         ) </span>
 
                         </h2>
@@ -66,9 +62,14 @@
                                 <ul class="list-s clearfix">
 
                                     <li>
+
+                                        @foreach($ibook as $k=>$v)
+
                                         <a href="https://book.douban.com/subject/1230413/" class="cover"><img
-                                                    alt="深入理解计算机系统" title="深入理解计算机系统" src="Picture/s1470003.jpg"></a>
+                                                    alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
+                                        @endforeach
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -77,14 +78,90 @@
 
 
                 </div>
+                @endif
+                @if(!empty($rbook))
+                <div id="db-book-mine">
 
 
-                <h2>我的笔记 &nbsp; ·&nbsp;·&nbsp;·&nbsp;
-                </h2>
-                <p>笔记是你阅读中的随想随记，是你写在书页留白处的那些话。</p>
+                    <div class="">
+
+
+                        <h2>
+                            <span class="">读过</span>
+                            &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+                            <span class="pl">&nbsp;(
+          <a href="https://book.douban.com/people/148026085/wish">{{count($rbook)}}本</a>
+        ) </span>
+
+                        </h2>
+
+
+                        <div class="mod">
+                            <div class="sub-list">
+                                <ul class="list-s clearfix">
+
+                                    <li>
+
+                                        @foreach($rbook as $k=>$v)
+
+                                            <a href="https://book.douban.com/subject/1230413/" class="cover"><img
+                                                        alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
+                                        @endforeach
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                @endif
+                @if(!empty($zbook))
+                <div id="db-book-mine">
+
+
+                    <div class="">
+
+
+                        <h2>
+                            <span class="">在读</span>
+                            &nbsp;&middot;&nbsp;&middot;&nbsp;&middot;
+                            <span class="pl">&nbsp;(
+          <a href="https://book.douban.com/people/148026085/wish">{{count($ibook)}}本</a>
+        ) </span>
+
+                        </h2>
+
+
+                        <div class="mod">
+                            <div class="sub-list">
+                                <ul class="list-s clearfix">
+
+                                    <li>
+
+                                        @foreach($zbook as $k=>$v)
+
+                                            <a href="https://book.douban.com/subject/1230413/" class="cover"><img
+                                                        alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
+                                        @endforeach
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+                @endif
 
 
             </div>
+
+
             <div class="aside" >
 
 
@@ -110,6 +187,7 @@
 
 
                     <div class="user-opt">
+                        @if($user->id != session('uid'))
                         <a href="javascript:void(0);" iid="{{$user->id}}" id="xgz" class="a-btn-add mr10 add_contact xgz  ygz" style="display: none" >取消关注</a>
                         <a href="javascript:void(0);" iid="{{$user->id}}" id="qgz" class="a-btn-add mr10 add_contact xgz  wgz" style="display: none" >关注此人</a>
                         @if($c ==1 )
@@ -120,10 +198,12 @@
                         <br>
                             {{--<a href="javascript:void(0);" iid="{{$user->id}}" id="gz" class="a-btn-add mr10 add_contact" @if($a->username == $usera->username && $a->attention_name == $user->username) 已经关注 @else 关注此人 @endif>已经关注</a>--}}
                         <a class="a-btn mr5" rel="nofollow"
-                           href="https://www.douban.com/doumail/write?to=1829293">发豆邮</a>
+                           href="/to/{{$user->id}}">发豆邮</a>
 
+                        @endif
+                        <div id="divac">
 
-                        <div id="divac"></div>
+                        </div>
 
                         <script>
                             var optPara = '',
@@ -344,28 +424,76 @@
 
                     </h2>
 
-
+                    @if(!empty($ibook))
                     <ul class="mbt">
 
 
-                        <li class="contact-update-time">
-                            <span class="pl">7月12日</span>
-                        </li>
-
                         <li class="mbtrmini">
-
-
+                            @foreach($ibook as $k => $v)
   <span class="starb">
     <span class="pl">
       想读
-      <a href="https://book.douban.com/subject/1230413/">深入理解计算机系统</a>
+      <a href="{{$v['img']}}">{{$v['title']}}</a>
     </span>
   </span>
-
+                            @endforeach
                         </li>
                     </ul>
-                </div>
+                    @endif
+                    @if(!empty($rbook))
+                    <ul class="mbt">
 
+
+                        <li class="mbtrmini">
+                            @foreach($rbook as $k => $v)
+                                <span class="starb">
+    <span class="pl">
+      读过
+      <a href="{{$v['img']}}">{{$v['title']}}</a>
+    </span>
+  </span>
+                            @endforeach
+                        </li>
+                    </ul>
+                    @endif
+                    @if(!empty($zbook))
+                    <ul class="mbt">
+
+
+                        <li class="mbtrmini">
+                            @foreach($zbook as $k => $v)
+                                <span class="starb">
+    <span class="pl">
+      在读
+      <a href="{{$v['img']}}">{{$v['title']}}</a>
+    </span>
+  </span>
+                            @endforeach
+                        </li>
+                    </ul>
+                        @endif
+                </div>
+                <div id="friend">
+
+                    <h2>
+                        {{$user->username}}的关注
+                        &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·
+            <span class="pl">&nbsp;(
+
+                <a href="/people/{{$user->id}}" target="_self">成员{{count($attentions)}}</a>
+                ) </span>
+                    </h2>
+                    @foreach( $atten2 as $k=>$v)
+                    <dl class="obu">
+                        <dt><a href="/mine/{{$v['id']}}" class="nbg"><img
+                                        src="{{$v['profile']}}" class="m_sub_img" alt="{{$v['username']}}"></a>
+                        </dt>
+                        <dd><a href="/mine/{{$v['id']}}">{{$v['username']}}</a></dd>
+                    </dl>
+                   @endforeach
+                    <br clear="all">
+
+                </div>
 
                 <div class="mod">
                     <p class="pl">

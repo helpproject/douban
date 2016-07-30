@@ -107,4 +107,24 @@ class AttentionController extends Controller
             return 1;
         }
     }
+
+    public function people($id){
+        $id = session('uid');
+        $user = User::where('id',$id)->firstOrFail();
+        $attention = Attention::where('username',$user->username)->get();
+        $ss= [];
+        foreach($attention as $k=>$v){
+            $ss[] = User::where('username',$v->attention_name)->first();
+
+        }
+
+        
+        return view('index/readbook/people',[
+            'ss'=>$ss,
+            'user'=>$user,
+            'attention'=>$attention
+        ]);
+    }
+    
+   
 }

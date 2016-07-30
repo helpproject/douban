@@ -21,6 +21,10 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var string
      */
+    public function readbook()
+    {
+        return $this->belongsTo('App\Readbook');
+    }
     protected $table = 'users';
 
 
@@ -40,4 +44,6 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
 }

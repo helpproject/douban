@@ -69,6 +69,17 @@ Route::group(['middleware'=>'login'],function(){
     Route::get('/suicide','UserController@suicide');
     Route::post('/suicide','UserController@dosuicide');
     Route::get('/upimage','UserController@upimage');
+	//我读
+	Route::get('/wodu/{id}','ReadbookController@wodu');
+	Route::get('/duguo/{id}','ReadbookController@duguo');
+	Route::get('/zaidu/{id}','ReadbookController@zaidu');
+	Route::get('/shanchu','ReadbookController@xiangdu');
+	//动态
+	Route::get('/dongtai/{id}','ReadbookController@dongtai');
+	//站内信
+	Route::get('/to/{id}','UserController@zhanneixin');
+	//所有关注的人
+	Route::get('/people/{id}','AttentionController@people');
 
 	// 图书管理
 	Route::controller('/admin/book','BookController');

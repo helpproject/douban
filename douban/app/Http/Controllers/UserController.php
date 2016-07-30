@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Mail;
 use Config;
 use Image;
+use App\Readbook;
+use App\Books;
 use App\Attention;
 use App\User;
 use App\Http\Requests;
@@ -415,7 +418,32 @@ class UserController extends Controller
         $usera = User::where('id',$iid)->firstOrFail();
         $username =  $usera->username;
         $attention = Attention::where('username',$username)->where('attention_name',$user->username)->first();
-       
+        $attentions = Attention::where('username',$user->username)->get();
+        $attentions2 = Attention::where('username',$user->username)->take(8)->orderBy('id','desc')->get();
+       $atten = [];
+        foreach($attentions as $k=>$v) {
+            $atten[] = User::where('username',$v['attention_name'])->first();
+        }
+        $atten2 = [];
+        foreach($attentions2 as $k=>$v) {
+            $atten2[] = User::where('username',$v['attention_name'])->first();
+        }
+        
+        $readbook = Readbook::where('user_id',$user->id)->where('status',1)->get();
+        $readbook2 = Readbook::where('user_id',$user->id)->where('status',2)->get();
+        $readbook3 = Readbook::where('user_id',$user->id)->where('status',3)->get();
+        $ibooks=[];
+        foreach ($readbook as $k=>$v) {
+            $ibooks[]= Books::where('id', $v['book_id'])->first();
+        }
+        $rbooks=[];
+        foreach ($readbook2 as $k=>$v) {
+            $rbooks[]= Books::where('id', $v['book_id'])->first();
+        }
+        $zbooks=[];
+        foreach ($readbook3 as $k=>$v) {
+            $zbooks[]= Books::where('id', $v['book_id'])->first();
+        }
         if(empty($attention)){
           $c = 1;
         }
@@ -434,6 +462,13 @@ class UserController extends Controller
         return view('/index/user/mine',[
             'user'=>$user,
             'c'=>$c,
+            'ibook'=>$ibooks,
+            'rbook'=>$rbooks,
+            'zbook'=>$zbooks,
+            'attentions'=>$attentions,
+            'atten'=>$atten,
+            'atten2'=> $atten2
+
 //            'usera'=>$usera,
 //            'a'=>$a
         ]);
@@ -455,5 +490,13 @@ class UserController extends Controller
 //            echo '0';die;
 //        }
 //    }
+
+    public function zhanneixin($id) {
+       $user = User::where('id',$id)->first();
+
+        return view('index.user.zhanneixin',[
+            'user'=>$user
+        ]);
+    }
 
 }

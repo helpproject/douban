@@ -20,9 +20,34 @@ Route::get('/admin/login','AdminController@alogin');
 Route::post('/admin/login','AdminController@adoLogin');
 
 /*******  前台 ********/
+
 	//分类页面
 	Route::get('/cate','CateController@index');
 	Route::get('/cate/hot','CateController@hot');
+
+
+	//分类页面
+	Route::get('/cate','CateController@index');
+
+Route::get('/login','UserController@login');
+Route::post('/login','UserController@dologin');
+//注册
+Route::get('/register','UserController@register');
+Route::post('/register','UserController@doregister');
+//激活
+Route::get('/jihuo','UserController@jihuo');
+//找回密码
+Route::get('/forget','UserController@forget');
+Route::post('/forget','UserController@doforget');
+Route::get('/reset','UserController@reset');
+Route::post('/reset','UserController@doreset');
+//我读
+Route::get('/mine/{id}','UserController@Mine');
+//关注
+Route::get('/attention','AttentionController@show');
+Route::get('/doattention','AttentionController@delete');
+
+
 
 
 	Route::get('/login','UserController@login');
@@ -49,8 +74,13 @@ Route::post('/admin/login','AdminController@adoLogin');
 Route::group(['middleware'=>'login'],function(){
 	//后台首页
 	Route::get('/admin','AdminController@index');
-	//后台模板
-	Route::get('/admin','Admincontroller@index');
+    //账号管理
+    Route::get('/account','UserController@account');
+    Route::post('/account','UserController@doaccount');
+    Route::get('/suicide','UserController@suicide');
+    Route::post('/suicide','UserController@dosuicide');
+    Route::get('/upimage','UserController@upimage');
+
 	// 图书管理
 	Route::controller('/admin/book','BookController');
 	// 作者管理

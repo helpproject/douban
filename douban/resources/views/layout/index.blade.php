@@ -18,7 +18,86 @@
 
     <link href="/index/Css/master.css" rel="stylesheet" type="text/css">
     <style type="text/css"></style>
-    
+
+    <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
+
+    <script>var _head_start = new Date();</script>
+    <script>define.config({
+        'ui/slide': 'Book.slide',
+        'ui/bubble': 'Book.Bubble'
+      }) Do.add('book/index', {
+        path: 'https://img3.doubanio.com/f/book/55fbd4a4ff1e2e85bf87df60be3b3dbe93b358bc/js/book/index.js'
+      }) Do.add('ui/slide', {
+        path: 'https://img3.doubanio.com/f/book/b7b632e744d6e70b6e2d31061455a0e111b055d8/js/book/ui/slide.js'
+      }) Do.add('ui/bubble', {
+        path: 'https://img3.doubanio.com/f/book/a32bc08e5a38888181b65e1be4f78e9f92003de9/js/book/ui/bubble.js'
+      }) Do.add('widget/tabs', {
+        path: 'https://img3.doubanio.com/f/book/4cc5e3d12acab0f0f5cf96c51d17b5fe46e0567e/js/book/widget/tabs.js'
+      }) Do('book/index')</script>
+    <script type='text/javascript'>var _vds = _vds || []; (function() {
+        _vds.push(['setAccountId', '22c937bbd8ebd703f2d8e9445f7dfd03']);
+        _vds.push(['setCS1', 'user_id', '1']); (function() {
+          var vds = document.createElement('script');
+          vds.type = 'text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://': 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();</script>
+    <script type='text/javascript'>var _vwo_code = (function() {
+        var account_id = 249272,
+        settings_tolerance = 2000,
+        library_tolerance = 2500,
+        use_existing_jquery = false,
+        // DO NOT EDIT BELOW THIS LINE
+        f = false,
+        d = document;
+        return {
+          use_existing_jquery: function() {
+            return use_existing_jquery;
+          },
+          library_tolerance: function() {
+            return library_tolerance;
+          },
+          finish: function() {
+            if (!f) {
+              f = true;
+              var a = d.getElementById('_vis_opt_path_hides');
+              if (a) a.parentNode.removeChild(a);
+            }
+          },
+          finished: function() {
+            return f;
+          },
+          load: function(a) {
+            var b = d.createElement('script');
+            b.src = a;
+            b.type = 'text/javascript';
+            b.innerText;
+            b.onerror = function() {
+              _vwo_code.finish();
+            };
+            d.getElementsByTagName('head')[0].appendChild(b);
+          },
+          init: function() {
+            settings_timer = setTimeout('_vwo_code.finish()', settings_tolerance);
+            var a = d.createElement('style'),
+            b = 'body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',
+            h = d.getElementsByTagName('head')[0];
+            a.setAttribute('id', '_vis_opt_path_hides');
+            a.setAttribute('type', 'text/css');
+            if (a.styleSheet) a.styleSheet.cssText = b;
+            else a.appendChild(d.createTextNode(b));
+            h.appendChild(a);
+            this.load('//dev.visualwebsiteoptimizer.com/j.php?a=' + account_id + '&u=' + encodeURIComponent(d.URL) + '&r=' + Math.random());
+            return settings_timer;
+          }
+        };
+      } ());
+      _vwo_settings_timer = _vwo_code.init();</script>
+    <script></script>
+
     <link rel="stylesheet" href="/index/Css/626b7f4ad46e153a.css"></head>
   
   <body>
@@ -168,7 +247,7 @@
     </div>
 
     <div id="wrapper">
-      <!-- douban ad end -->
+
       @section('content')
       <div id="content">
         <div class="grid-16-8 clearfix">
@@ -2087,5 +2166,426 @@
           <a href="https://www.douban.com/doubanapp/">移动应用</a>·
           <a href="https://www.douban.com/partner/">豆瓣广告</a></span>
       </div>
-    </div>
+
 </html>
+
+    <script type="text/javascript">Do(function() {
+        // 不再提醒
+        window.DOUBAN_SITE_URL = 'https://www.douban.com';
+        Douban.init_delete_reply_notify = function(b) {
+          var a = function(h) {
+            h.preventDefault();
+            var d = $(h.target);
+            var i = d[0].href.split("#")[1];
+            var c = (window.DOUBAN_SITE_URL || "") + "/j/reply_notify/remove_notify?id=" + i;
+            $.ajax({
+              url: c,
+              dataType: "jsonp"
+            });
+            var f = d.closest(".item-req");
+            if ($.contains($(".top-nav-reminder")[0], f[0])) {
+              f = f.parent();
+              var g = f.siblings().length;
+              f.fadeOut(function() {
+                f.remove()
+              });
+              if (g === 0) {
+                f.closest(".bd").find(".no-new-notis").show()
+              }
+            } else {
+              f.fadeOut()
+            }
+          };
+          if (b.type === "click") {
+            a(b)
+          } else {
+            $(b).click(a)
+          }
+        };
+        Douban.init_discard_notify = function(b) {
+          var a = function(i) {
+            i.preventDefault();
+            var c = (window.DOUBAN_SITE_URL || "") + "/j/notification/discard";
+            var f = $(i.target);
+            var d = f[0].name;
+            $.get(c, {
+              id: d,
+              ck: get_cookie("ck")
+            },
+            function(e) {},
+            "jsonp");
+            var g = f.closest(".item-req");
+            if ($.contains($(".top-nav-reminder")[0], g[0])) {
+              g = g.parent();
+              var h = g.siblings().length;
+              g.fadeOut(function() {
+                g.remove()
+              });
+              if (h === 0) {
+                g.closest(".bd").find(".no-new-notis").show()
+              }
+            } else {
+              g.fadeOut()
+            }
+          };
+          if (b.type === "click") {
+            a(b)
+          } else {
+            $(b).click(a)
+          }
+        };
+        var current_noty_num = current_doumail_num = 0;
+        function updateNotyNum(b) {
+          current_noty_num = b;
+          var a = $("#db-global-nav .top-nav-reminder");
+          if (!b) {
+            a.find(".num").remove();
+            return
+          }
+          var c = a.find(".num span");
+          if (!c.length) {
+            a.append('<span class="num"><span>' + b + "</span><i></i></span>")
+          } else {
+            c.html(b)
+          }
+          if (b > 0 && b < 10) {
+            a.css("margin-right", "5px")
+          } else {
+            if (b > 10) {
+              a.css("margin-right", "15px")
+            }
+          }
+        }
+        function updateDoumailNum(b) {
+          current_doumail_num = b;
+          var c = $("#top-nav-doumail-link");
+          var a = c.find("em");
+          if (!b) {
+            a.remove();
+            return
+          }
+          var d = "(" + b + ")";
+          if (!a.length) {
+            c.append("<em>" + d + "</em>")
+          } else {
+            a.html(d)
+          }
+        }
+        function addCheckNotyLog() {
+          $("#top-nav-notimenu").data("from_push", "Y")
+        }
+        function addCheckDoumailLog(c) {
+          var b = document.getElementById("top-nav-doumail-link");
+          b.onclick = function() {
+            moreurl(this, {
+              from: "check_doumail_from_push",
+              uid: c
+            })
+          }
+        }
+        function showDesktopNotification(c) {
+          if (!window.Notification) {
+            return
+          }
+          if (!c.num) {
+            return
+          }
+          var b = get_cookie("enable_push_desktop_noty");
+          b = b == "1";
+          if (!b) {
+            return
+          }
+          var a = "";
+          if (c.type == "notification") {
+            a = "你收到一个新提醒"
+          } else {
+            if (c.type == "doumail") {
+              a = "你收到一封新豆邮"
+            } else {
+              return
+            }
+          }
+          var d = new Notification("豆瓣", {
+            body: a,
+            tag: c.id,
+            icon: "https://img3.doubanio.com/pics/icon/dou36.png"
+          });
+          d.onclick = function() {
+            window.focus();
+            this.close()
+          };
+          d.onshow = function() {
+            setTimeout(function() {
+              d.close()
+            },
+            3000)
+          }
+        }
+        function get_auth_token(a) {
+          $.ajax({
+            url: DOUBAN_SITE_URL + "/j/push/get_token_with_ts",
+            dataType: "jsonp",
+            success: function(b) {
+              a(b.token, b.timestamp)
+            }
+          })
+        }
+        var timer = null;
+        function startSyncNotyNumsCrossTabs() {
+          clearTimeout(timer);
+          timer = setTimeout(function() {
+            var b = parseInt(get_cookie("push_noty_num") || "0", 10),
+            a = parseInt(get_cookie("push_doumail_num") || "0", 10);
+            if (b != current_noty_num) {
+              updateNotyNum(b)
+            }
+            if (a != current_doumail_num) {
+              updateDoumailNum(a)
+            }
+            if (!b && !a) {
+              clearTimeout(timer)
+            } else {
+              timer = setTimeout(arguments.callee, 1500)
+            }
+          },
+          1500)
+        }
+        var retry_times = 0,
+        max_retry = 50,
+        retry_interval_unit = 1000 * 3;
+        function connectSSE(b, a, g) {
+          if (!window.EventSource) {
+            return
+          }
+          var d = "notification:user:" + b,
+          c = (b + "_" + g) + ":" + a,
+          i = "https://push.douban.com:4394/sse?channel=" + d + "&auth=" + c;
+          if (location.protocol == "https:") {
+            i = "https://push.douban.com:4397/sse?channel=" + d + "&auth=" + c
+          }
+          var f = null;
+          try {
+            f = new EventSource(i)
+          } catch(h) {
+            return
+          }
+          f.addEventListener("open",
+          function() {
+            retry_times = 0
+          },
+          false);
+          f.addEventListener("error",
+          function(j) {
+            if (this.readyState == EventSource.CLOSED || this.readyState == EventSource.CONNECTING) {
+              f.close();
+              f = null;
+              setTimeout(function() {
+                retry_times += 1;
+                if (retry_times < max_retry) {
+                  get_auth_token(function(e, k) {
+                    connectSSE(b, e, k)
+                  })
+                }
+              },
+              retry_times * retry_interval_unit)
+            }
+          },
+          false);
+          f.addEventListener("message",
+          function(k) {
+            var j = JSON.parse(k.data);
+            if (j.type == "notification") {
+              updateNotyNum(j.num);
+              addCheckNotyLog();
+              set_cookie({
+                push_noty_num: j.num
+              })
+            } else {
+              if (j.type == "doumail") {
+                updateDoumailNum(j.num);
+                addCheckDoumailLog(b);
+                set_cookie({
+                  push_doumail_num: j.num
+                })
+              }
+            }
+            startSyncNotyNumsCrossTabs();
+            showDesktopNotification(j)
+          },
+          false)
+        };
+
+        var notimenu = $('#top-nav-notimenu');
+        notimenu.bind('moreitem:show',
+        function() {
+          $.ajax({
+            url: 'https://www.douban.com/j/notification/nav_pop',
+            data: {
+              ck: get_cookie('ck'),
+              k: '148026085:548d9e32fcd0a79951301ea2ade54f9b183daccd',
+              from_push: notimenu.data('from_push')
+            },
+            dataType: 'jsonp',
+            success: function(e) {
+              if (e.r) {
+                return;
+              }
+              notimenu.html(e.s);
+              if (e.n === 0) {
+                $('#db-global-nav .top-nav-reminder .num').remove();
+              } else {
+                $('#db-global-nav .top-nav-reminder .num span').html(e.n);
+              }
+              set_cookie({
+                push_noty_num: e.n
+              });
+              if (window.load_event_monitor) {
+                load_event_monitor($('#db-global-nav'));
+              }
+            }
+          });
+        });
+
+        $(function() {
+          $.ajax({
+            url: 'https://www.douban.com/j/notification/num',
+            dataType: 'jsonp',
+            success: function(r) {
+              updateNotyNum(r.num);
+            }
+          });
+          $.ajax({
+            url: 'https://www.douban.com/j/doumail/num',
+            dataType: 'jsonp',
+            success: function(r) {
+              updateDoumailNum(r.num);
+            }
+          });
+        });
+
+        connectSSE('148026085', 'de9431408d1c620822ccc42af437ba526def7a92', '1469542057');
+        set_cookie({
+          push_noty_num: 0,
+          push_doumail_num: 0
+        });
+
+      });</script>
+    <script type="text/javascript" src="/index/Scripts/559ed7dcf41d7f07.js"></script>
+    <!-- mako -->
+    <!-- douban ad begin -->
+    <script type="text/javascript">(function(global) {
+        var newNode = global.document.createElement('script'),
+        existingNode = global.document.getElementsByTagName('script')[0],
+        adSource = '//erebor.douban.com/',
+        userId = '148026085',
+        browserId = 'Qc5tVeL8gMU',
+        criteria = '3:/',
+        preview = '',
+        debug = false,
+        adSlots = ['dale_book_home_top_right', 'dale_book_home_top_right2', 'dale_book_home_left_middle', 'dale_book_home_bottem_right', 'dale_book_home_top_super_banner', 'dale_book_home_left_top', 'dale_book_homepage_right_bottom'];
+
+        global.DoubanAdRequest = {
+          src: adSource,
+          uid: userId,
+          bid: browserId,
+          crtr: criteria,
+          prv: preview,
+          debug: debug
+        };
+        global.DoubanAdSlots = (global.DoubanAdSlots || []).concat(adSlots);
+
+        newNode.setAttribute('type', 'text/javascript');
+        newNode.setAttribute('src', '/index/js/ad.js');
+        newNode.setAttribute('async', true);
+        existingNode.parentNode.insertBefore(newNode, existingNode);
+      })(this);</script>
+    <!-- douban ad end -->
+    <script>Do(function() {
+        $('.click-track').on('click',
+        function(e) {
+          e.preventDefault() var name = $(this).data('name') moreurl(this, {
+            from: name
+          })
+        })
+      })</script>
+    <script type="text/javascript">var _paq = _paq || [];
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']); (function() {
+        var p = (('https:' == document.location.protocol) ? 'https': 'http'),
+        u = p + '://fundin.douban.com/';
+        _paq.push(['setTrackerUrl', u + 'piwik']);
+        _paq.push(['setSiteId', '100001']);
+        var d = document,
+        g = d.createElement('script'),
+        s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.defer = true;
+        g.async = true;
+        g.src = p + '://nihao.com/index/js/piwik.js';
+        s.parentNode.insertBefore(g, s);
+      })();</script>
+    <script type="text/javascript">var setMethodWithNs = function(namespace) {
+        var ns = namespace ? namespace + '.': '',
+        fn = function(string) {
+          if (!ns) {
+            return string
+          }
+          return ns + string
+        }
+        return fn
+      }
+
+      var gaWithNamespace = function(fn, namespace) {
+        var method = setMethodWithNs(namespace) fn.call(this, method)
+      }
+
+      var _gaq = _gaq || [],
+      accounts = [{
+        id: 'UA-7019765-1',
+        namespace: 'douban'
+      },
+      {
+        id: 'UA-7019765-16',
+        namespace: ''
+      }],
+      gaInit = function(account) {
+        gaWithNamespace(function(method) {
+          gaInitFn.call(this, method, account)
+        },
+        account.namespace)
+      },
+      gaInitFn = function(method, account) {
+        _gaq.push([method('_setAccount'), account.id])
+
+        _gaq.push([method('_addOrganic'), 'google', 'q']) _gaq.push([method('_addOrganic'), 'baidu', 'wd']) _gaq.push([method('_addOrganic'), 'soso', 'w']) _gaq.push([method('_addOrganic'), 'youdao', 'q']) _gaq.push([method('_addOrganic'), 'so.360.cn', 'q']) _gaq.push([method('_addOrganic'), 'sogou', 'query']) if (account.namespace) {
+          _gaq.push([method('_addIgnoredOrganic'), '豆瓣']) _gaq.push([method('_addIgnoredOrganic'), 'douban']) _gaq.push([method('_addIgnoredOrganic'), '豆瓣网']) _gaq.push([method('_addIgnoredOrganic'), 'www.douban.com'])
+        }
+
+        if (account.namespace === 'douban') {
+          _gaq.push([method('_setDomainName'), '.douban.com'])
+        }
+
+        _gaq.push([method('_setCustomVar'), 1, 'responsive_view_mode', 'desktop', 3])
+
+        _gaq.push([method('_setCustomVar'), 2, 'login_status', '1', 2]);
+
+        _gaq.push([method('_trackPageview')])
+      }
+
+      for (var i = 0,
+      l = accounts.length; i < l; i++) {
+        var account = accounts[i] gaInit(account)
+      }
+
+      ; (function() {
+        var ga = document.createElement('script');
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
+        ga.setAttribute('async', 'true');
+        document.documentElement.firstChild.appendChild(ga);
+      })()</script>
+    <!-- dis6-docker--></body>
+
+</html>
+@section('myJs')
+@show
+

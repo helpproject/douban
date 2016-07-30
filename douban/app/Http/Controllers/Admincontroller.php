@@ -40,11 +40,45 @@ class AdminController extends Controller
     	if (Hash::check($password,$info['password'])) {
 
     		session(['uid'=>$info['id']]);
-    		return redirect('/admin');
+    		$url = session('_previous')['url'];
+    		$url = substr($url,17);
+    
+    		if ($url) {
+    			return redirect($url);
+    		}else{
+    			return redirect('/admin');
+    		}
+    		
     	}
 
     	return back()->with('error','密码错误');
     }
+
+    // 发送ajax登录
+    // public function getLogin(Request $request)
+    // {	
+    // 	// 获取当前的登录的url
+    	
+
+    // 	$username = $request->input('username');
+    // 	$password = $request->input('password');
+
+    // 	$info = User::where('username',$username)->first();
+    // 	if (empty($info)) {
+    // 		echo 
+    // 	}else if(Hash::check($password,$info['password'])){
+
+    // 	}
+
+    // 	if (Hash::check($password,$info['password'])) {
+
+    // 		session(['uid'=>$info['id']]);
+    // 		return redirect('/admin');
+    // 	}
+
+    // 	return back()->with('error','密码错误');
+    	
+    // }
 
     public function cc()
     {	

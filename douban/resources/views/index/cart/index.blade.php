@@ -196,7 +196,7 @@
           <span class="abbr" style="display: inline;">
             <br></span>
         </td>
-        <td class="total" style="width: 84px;">{{$v->price}}</td>
+        <td class="total" style="width: 84px;">{{$v->price}}*</td>
         <td class="color-gray" style="width: 84px;">
         	<a class="delete" id="{{$v->id}}" href="javascript:;">删除</a>
         </td>
@@ -234,56 +234,60 @@
   <br>
 </div>
 <div class="modal fade pop_win" id="myModal" style="display: none; background:#FFF7E8; width:600px;margin:20px; left: 50%; top: 50%; margin-left: -280px; margin-top: -150px; visibility: visible; z-index: 9999;">
-        <div class="modal-dialog">
-            <div class="modal-body">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">添加收货地址</h4>
-                    </div>
-                    <div class="modal-body">
-                    	<form id="addAddress" name="addAddress">
-						  <div class="form-group">
-						    <label for="exampleInputEmail1">收货人:</label>
-						    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="收货人">
-						  </div>
-						  <div class="form-group">
-						    <label for="exampleInputPassword1">手机号</label>
-						    <input type="text" name="phone" class="form-control" id="exampleInputPassword1" placeholder="手机号">
-						  </div>
-						  <div class="form-group">
-						  	<label for="exampleInputPassword1">省市县</label>
-						  	<select id="province" name="sheng" class="form-contro1" style="width:29%">
-						  		<option value="">请选择</option>
-						  	</select>
-						  	<select id="city" name="shi" class="form-contro1" style="width:29%">
-						  		<option value="">请选择</option>
-						  	</select>
-						  	<select id="xian" name="xian" class="form-contro1" style="width:29%">
-						  		<option value="">请选择</option>
-						  	</select>
-						  </div>
-						  <div class="form-group">
-						  	<label for="exampleInputPassword1">详细地址</label>
-						  	<textarea class="form-control" name="detail" id="" cols="30" rows="3"></textarea>
-						  </div>
-						  <div class="form-group">
-						  	<label for="exampleInputPassword1">邮政编码</label>
-						  	<textarea class="form-control" name="youbian" id="" cols="30" rows="3"></textarea>
-						  </div>
-						  <div class="form-group">
-						  	<label for="exampleInputPassword1">默认收货地址</label>
-						  	<input type="checkbox" value="1" name="isdefault" id="exampleInputPassword1">
-						  </div>
-						</form>
-                    </div>
-                    <div class="modal-footer" style="float:right">
-                        <button type="button" class="btn btn-primary submit_cart" id="addAddress2">添加地址</button>
-                        <button type="button" class="btn default submit_cart" data-dismiss="modal">关闭</button>
-                    </div>
+    <div class="modal-dialog">
+        <div class="modal-body">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">添加收货地址</h4>
+                </div>
+                <div class="modal-body">
+                	<form id="addAddress" name="addAddress">
+					  <div class="form-group">
+					    <label for="exampleInputEmail1">收货人:</label>
+					    <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="收货人">
+					  </div>
+					  <div class="form-group">
+					    <label for="exampleInputPassword1">手机号</label>
+					    <input type="text" name="phone" class="form-control" id="exampleInputPassword1" placeholder="手机号">
+					  </div>
+					  <div class="form-group">
+					  	<label for="exampleInputPassword1">省市县</label>
+					  	<select id="province" name="sheng" class="form-contro1" style="width:29%">
+					  		<option value="">请选择</option>
+					  	</select>
+					  	<select id="city" name="shi" class="form-contro1" style="width:29%">
+					  		<option value="">请选择</option>
+					  	</select>
+					  	<select id="xian" name="xian" class="form-contro1" style="width:29%">
+					  		<option value="">请选择</option>
+					  	</select>
+					  </div>
+					  <div class="form-group">
+					  	<label for="exampleInputPassword1">详细地址</label>
+					  	<textarea class="form-control" name="detail" id="" cols="30" rows="3"></textarea>
+					  </div>
+					  <div class="form-group">
+					  	<label for="exampleInputPassword1">邮政编码</label>
+					  	<textarea class="form-control" name="youbian" id="" cols="30" rows="3"></textarea>
+					  </div>
+					  <div class="form-group">
+					  	<label for="exampleInputPassword1">默认收货地址</label>
+					  	<input type="checkbox" value="1" name="isdefault" id="exampleInputPassword1">
+					  </div>
+					</form>
+                </div>
+                <div class="modal-footer" style="float:right">
+                    <button type="button" class="btn btn-primary submit_cart" id="addAddress2">添加地址</button>
+                    <button type="button" class="btn default submit_cart" data-dismiss="modal">关闭</button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
+
+@endsection
+
+@section('myJs')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <script>
 	$(function(){
@@ -351,6 +355,7 @@
 		            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 		        }
 		});
+
 		//绑定单击事件 提交表单内容	
 		$('#addAddress2').click(function(){
 			//获取表单中的所有的内容
@@ -358,7 +363,7 @@
 			var from = $('#addAddress').serialize(); //获取url参数字符串
 			// console.log(from);
 			//发送ajax
-			$.post('/insetAddress', from, function(data){
+			$.get('/insetAddress', from, function(data){
 				if (data == '1') {
 					$('#myModal').css('display','none');
 					//获取地址的副本元素
@@ -399,7 +404,6 @@
 	})
 </script>
 <script>
-
 	$(function(){
 
 		$('.minus').click(function(){

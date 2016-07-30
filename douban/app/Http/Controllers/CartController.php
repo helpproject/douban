@@ -11,20 +11,18 @@ use App\Http\Controllers\Controller;
 class CartController extends Controller
 {
 	public  $data = [];
+
     //发送ajax提叫购物车
     public function getCart(Request $request)
     {	
-        
+        $uid = session('uid');
     	if(empty(session('uid'))){
     		echo 0;die;
     	}else{
 
     		 $res = $this->checkExists($request->input('id'));
     		 if (!$res) {
-            	// session(['cart'=>$request->only(['id'])]);
-                $request->session()->push('cart',$request->input('id'));
-
-                
+                $request->session()->push('cart',$request->input('id'));         
       		 }
              echo 1; 		
     		// var_dump(session("cart"));
@@ -46,10 +44,10 @@ class CartController extends Controller
         return false;
     }
 
-    public function cart()
+    public function cart($uid)
     {	
+        // dd(session()->all());
     	$cart = session('cart');
-        $uid = session('uid');
     	$data = [];
     	foreach ($cart as $key => $value) {
             $data[] = $value;

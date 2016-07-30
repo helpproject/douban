@@ -13,6 +13,8 @@
 //前台首页
 Route::get('/', 'HomeController@home');
 Route::get('/e', 'HomeController@e');
+//ajax登录
+Route::post('/getLogin','AdminController@getLogin');
 
 //后台登录页面
 Route::get('/admin/login','AdminController@alogin');
@@ -96,11 +98,12 @@ Route::group(['middleware'=>'login'],function(){
 	//所有关注的人
 	Route::get('/people/{id}','AttentionController@people');
 	//购物车页面
-	Route::get('/cart','CartController@cart');
+	Route::get('/cart/{uid}','CartController@cart');
+	Route::get('/cart/init','CartController@init');
 	//购物车操作
 	Route::get('/getDelete','CartController@getDelete');
 	//添加收货地址
-	Route::post('/insetAddress','CartController@insetAddress');
+	Route::get('/insetAddress','CartController@insetAddress');
 	//创建订单地址
 	Route::post('/Order/create','OrderController@create');
 

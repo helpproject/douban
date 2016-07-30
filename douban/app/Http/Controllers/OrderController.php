@@ -11,7 +11,7 @@ use App\Order;
 use App\Books;
 use App\User;
 use Config;
-use App\OrderGoods;
+use App\OrderBook;
 
 use DB;
 use App\Http\Requests\OrderControllerRequest;// 地址插入验证
@@ -185,12 +185,13 @@ class OrderController extends Controller
         // dd($cart);
         if ($order->save()) {
             foreach ($cart as $key => $value) {
-                $orderGoods = new OrderGoods;
+                $orderGoods = new OrderBook;
                 $orderGoods -> order_id = $order -> id;
                 $orderGoods -> book_id = $value['id'];
                 $orderGoods -> total = $request->input('total');
                 $orderGoods -> save();
             }
+            session(['cart'=>null]);
         }
         return redirect('http://pay.xiaohigh.com/api/deal?to=xiaohigh@163.com&money='.$order->total.'&order_id='.$order->id.'&info='.config::get('app.APP_NAME').'商品购买&return_url=http://www.db.com/Order/changeStatus');
     }
@@ -226,13 +227,14 @@ class OrderController extends Controller
 
         // }
         $orders = User::find($uid)->order;
+        // dd($orders);
         $books = [];
         foreach ($orders as $k => $v) {
            foreach($v->books as $a => $b){
             $books[$v->id][] = $b;
            }
         }
-        dd($books);
+        // dd($books);
         return view('index.cart.ordercart',[
             
             ]);       

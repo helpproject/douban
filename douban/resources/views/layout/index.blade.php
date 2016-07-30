@@ -14,146 +14,12 @@
     <meta property="qc:admins" content="1520412177364752166375">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="" type="image/x-icon">
-    <script>var Douban = {},
-      Book = {}
-      var Do = function() {
-        Do.actions.push([].slice.call(arguments))
-      };
-      Do.ready = function() {
-        Do.actions.push([].slice.call(arguments))
-      };
-      Do.add = Do.define = function(a, b) {
-        Do.mods[a] = b
-      };
-      Do.global = function() {
-        Do.global.mods = Array.concat(Do.global.mods, [].slice.call(arguments))
-      };
-      Do.global.mods = [];
-      Do.mods = {};
-      Do.actions = [];</script>
-    <script src="/index/Scripts/define.js"></script>
-    <script>define.ns('Book') define.config({
-        'jquery': '$',
-        'piwik': 'Piwik',
-        'mod/ga': 'Book.ga',
-        'mod/ajax': 'Book.ajax',
-        'mod/cookie': 'Book.cookie'
-      })
-
-      Do.add('mod/cookie', {
-        path: '',
-        type: 'js'
-      })
-
-      Do.add('mod/ajax', {
-        path: '',
-        requires: ['mod/cookie'],
-        type: 'js'
-      })
-
-      Do.add('mod/ga', {
-        path: '',
-        type: 'js'
-      })</script>
-    <script>!
-      function(f) {
-        var h = function(o, n, m) {
-          var k = new Date(),
-          j,
-          l;
-          n = n || 30;
-          m = m || "/";
-          k.setTime(k.getTime() + (n * 24 * 60 * 60 * 1000));
-          j = "; expires=" + k.toGMTString();
-          for (l in o) {
-            f.cookie = l + "=" + o[l] + j + "; path=" + m
-          }
-        },
-        d = function(m) {
-          var l = m + "=",
-          o, n, j, k = f.cookie.split(";");
-          for (n = 0, j = k.length; n < j; n++) {
-            o = k[n].replace(/^\s+|\s+$/g, "");
-            if (o.indexOf(l) == 0) {
-              return o.substring(l.length, o.length).replace(/\"/g, "")
-            }
-          }
-          return null
-        },
-        e = f.write,
-        b = {
-          "douban.com": 1,
-          "douban.fm": 1,
-          "google.com": 1,
-          "google.cn": 1,
-          "": 1,
-          "gmaptiles.co.kr": 1,
-          "gstatic.com": 1,
-          "gstatic.cn": 1,
-          "google-analytics.com": 1,
-          "googleadservices.com": 1
-        },
-        a = function(l, k) {
-          var j = new Image();
-          j.onload = function() {};
-          j.src = "" + encodeURIComponent(l) + "&environment=" + encodeURIComponent(k)
-        },
-        i = function(k) {
-          try {
-            e.call(f, k)
-          } catch(j) {
-            e(k)
-          }
-        },
-        c = /<script.*?src\=["']?([^"'\s>]+)/ig,
-        // g = /http:\/\/(.+?)\.([^\/]+).+/i;
-        f.writeln = f.write = function(k) {
-          var j = c.exec(k),
-          l;
-          if (!j) {
-            i(k);
-            return
-          }
-          l = g.exec(j[1]);
-          if (!l) {
-            i(k);
-            return
-          }
-          if (b[l[2]]) {
-            i(k);
-            return
-          }
-          if (d("hj") === "tqs") {
-            return
-          }
-          a(j[1], location.href);
-          h({
-            hj: "tqs"
-          },
-          1);
-          setTimeout(function() {
-            location.replace(location.href)
-          },
-          50)
-        }
-      } (document);</script>
+  
     <link href="/index/Css/master.css" rel="stylesheet" type="text/css">
     <style type="text/css"></style>
     <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
 
-    <script>var _head_start = new Date();</script>
-    <script>define.config({
-        'ui/slide': 'Book.slide',
-        'ui/bubble': 'Book.Bubble'
-      }) Do.add('book/index', {
-        path: ''
-      }) Do.add('ui/slide', {
-        path: ''
-      }) Do.add('ui/bubble', {
-        path: ''
-      }) Do.add('widget/tabs', {
-        path: ''
-      }) Do('book/index')</script>
+
     <script type='text/javascript'>var _vds = _vds || []; (function() {
         _vds.push(['setAccountId', '22c937bbd8ebd703f2d8e9445f7dfd03']);
         _vds.push(['setCS1', 'user_id', '1']); (function() {
@@ -369,7 +235,7 @@
           <li>
             <a href="/cate">分类浏览</a></li>
           <li class="book-cart ">
-            <a href="/cate">购书单</a></li>
+            <a href="/cart/{{session('uid')}}">购书单</a></li>
           <li>
             <a href="">电子图书</a></li>
           <li>
@@ -717,7 +583,6 @@
             
             <!-- douban app begin -->
             <div class="s" data-dstat-areaid="60" data-dstat-mode="click,expose">
-              <style>.qrcode-app { margin: 20px 0; } .qrcode-app a.download { display: block; width: 300px; height: 80px; background: url(Images/qrcode_app4@2x.png) no-repeat; background-size: contain; background-image: -webkit-image-set(url() 1x, url() 2x); background-image: -moz-image-set(url() 1x, url() 2x); background-image: -ms-image-set(url() 1x, url() 2x); background-image: -o-image-set(url() 1x, url() 2x); }</style>
               <div class="qrcode-app">
                 <a class="download" href="" target="_blank"></a>
               </div>
@@ -1052,91 +917,9 @@
     <!-- douban ad begin -->
    
     <!-- douban ad end -->
-    <script>Do(function() {
-        $('.click-track').on('click',
-        function(e) {
-          e.preventDefault() var name = $(this).data('name') moreurl(this, {
-            from: name
-          })
-        })
-      })</script>
-    <script type="text/javascript">var _paq = _paq || [];
-      _paq.push(['trackPageView']);
-      _paq.push(['enableLinkTracking']); (function() {
-        // var p = (('https:' == document.location.protocol) ? 'https': 'http'),
-        u = p + '://fundin.douban.com/';
-        _paq.push(['setTrackerUrl', u + 'piwik']);
-        _paq.push(['setSiteId', '100001']);
-        var d = document,
-        g = d.createElement('script'),
-        s = d.getElementsByTagName('script')[0];
-        g.type = 'text/javascript';
-        g.defer = true;
-        g.async = true;
-        g.src = p + '';
-        s.parentNode.insertBefore(g, s);
-      })();</script>
-    <script type="text/javascript">var setMethodWithNs = function(namespace) {
-        var ns = namespace ? namespace + '.': '',
-        fn = function(string) {
-          if (!ns) {
-            return string
-          }
-          return ns + string
-        }
-        return fn
-      }
 
-      var gaWithNamespace = function(fn, namespace) {
-        var method = setMethodWithNs(namespace) fn.call(this, method)
-      }
-
-      var _gaq = _gaq || [],
-      accounts = [{
-        id: 'UA-7019765-1',
-        namespace: 'douban'
-      },
-      {
-        id: 'UA-7019765-16',
-        namespace: ''
-      }],
-      gaInit = function(account) {
-        gaWithNamespace(function(method) {
-          gaInitFn.call(this, method, account)
-        },
-        account.namespace)
-      },
-      gaInitFn = function(method, account) {
-        _gaq.push([method('_setAccount'), account.id])
-
-        _gaq.push([method('_addOrganic'), 'google', 'q']) _gaq.push([method('_addOrganic'), 'baidu', 'wd']) _gaq.push([method('_addOrganic'), 'soso', 'w']) _gaq.push([method('_addOrganic'), 'youdao', 'q']) _gaq.push([method('_addOrganic'), 'so.360.cn', 'q']) _gaq.push([method('_addOrganic'), 'sogou', 'query']) if (account.namespace) {
-          _gaq.push([method('_addIgnoredOrganic'), '豆瓣']) _gaq.push([method('_addIgnoredOrganic'), 'douban']) _gaq.push([method('_addIgnoredOrganic'), '豆瓣网']) _gaq.push([method('_addIgnoredOrganic'), ''])
-        }
-
-        if (account.namespace === 'douban') {
-          _gaq.push([method('_setDomainName'), '.douban.com'])
-        }
-
-        _gaq.push([method('_setCustomVar'), 1, 'responsive_view_mode', 'desktop', 3])
-
-        _gaq.push([method('_setCustomVar'), 2, 'login_status', '1', 2]);
-
-        _gaq.push([method('_trackPageview')])
-      }
-
-      for (var i = 0,
-      l = accounts.length; i < l; i++) {
-        var account = accounts[i] gaInit(account)
-      }
-
-      ; (function() {
-        var ga = document.createElement('script');
-        // ga.src = ('https:' == document.location.protocol ? 'https://ssl': 'http://www') + '.google-analytics.com/ga.js';
-        ga.setAttribute('async', 'true');
-        document.documentElement.firstChild.appendChild(ga);
-      })()</script>
+      @section('myJs')
+      @show
     <!-- dis6-docker--></body>
-
+      
 </html>
-@section('myJs')
-@show

@@ -21,7 +21,7 @@ class LoginMiddleware
         }
 
         session(['redirectUrl'=> isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : null]);  
-        return redirect('/admin/login');
+        return redirect('/admin');
     }
 
     

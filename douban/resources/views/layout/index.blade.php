@@ -14,131 +14,11 @@
     <meta property="qc:admins" content="1520412177364752166375">
     <title>@yield('title')</title>
     <link rel="shortcut icon" href="https://img3.doubanio.com/favicon.ico" type="image/x-icon">
-    <script>var Douban = {},
-      Book = {}
-      var Do = function() {
-        Do.actions.push([].slice.call(arguments))
-      };
-      Do.ready = function() {
-        Do.actions.push([].slice.call(arguments))
-      };
-      Do.add = Do.define = function(a, b) {
-        Do.mods[a] = b
-      };
-      Do.global = function() {
-        Do.global.mods = Array.concat(Do.global.mods, [].slice.call(arguments))
-      };
-      Do.global.mods = [];
-      Do.mods = {};
-      Do.actions = [];</script>
-    <script src="/index/Scripts/define.js"></script>
-    <script>define.ns('Book') define.config({
-        'jquery': '$',
-        'piwik': 'Piwik',
-        'mod/ga': 'Book.ga',
-        'mod/ajax': 'Book.ajax',
-        'mod/cookie': 'Book.cookie'
-      })
+    <script type="text/javascript" src="/index/js/jquery-1.8.3.min.js"></script>
 
-      Do.add('mod/cookie', {
-        path: 'https://img3.doubanio.com/f/book/863dbeaa2e8482485e4c41b5ee6e1e5caf5b2317/js/book/mod/cookie.js',
-        type: 'js'
-      })
-
-      Do.add('mod/ajax', {
-        path: 'https://img3.doubanio.com/f/book/3721d40f6c17d71c69cd3670d7229ca5d7c5f5a2/js/book/mod/ajax.js',
-        requires: ['mod/cookie'],
-        type: 'js'
-      })
-
-      Do.add('mod/ga', {
-        path: 'https://img3.doubanio.com/f/book/0153f58dca13f8c3b603a9aa6d64856714d0dc28/js/book/mod/ga.js',
-        type: 'js'
-      })</script>
-    <script>!
-      function(f) {
-        var h = function(o, n, m) {
-          var k = new Date(),
-          j,
-          l;
-          n = n || 30;
-          m = m || "/";
-          k.setTime(k.getTime() + (n * 24 * 60 * 60 * 1000));
-          j = "; expires=" + k.toGMTString();
-          for (l in o) {
-            f.cookie = l + "=" + o[l] + j + "; path=" + m
-          }
-        },
-        d = function(m) {
-          var l = m + "=",
-          o, n, j, k = f.cookie.split(";");
-          for (n = 0, j = k.length; n < j; n++) {
-            o = k[n].replace(/^\s+|\s+$/g, "");
-            if (o.indexOf(l) == 0) {
-              return o.substring(l.length, o.length).replace(/\"/g, "")
-            }
-          }
-          return null
-        },
-        e = f.write,
-        b = {
-          "douban.com": 1,
-          "douban.fm": 1,
-          "google.com": 1,
-          "google.cn": 1,
-          "googleapis.com": 1,
-          "gmaptiles.co.kr": 1,
-          "gstatic.com": 1,
-          "gstatic.cn": 1,
-          "google-analytics.com": 1,
-          "googleadservices.com": 1
-        },
-        a = function(l, k) {
-          var j = new Image();
-          j.onload = function() {};
-          j.src = "https://www.douban.com/j/except_report?kind=ra022&reason=" + encodeURIComponent(l) + "&environment=" + encodeURIComponent(k)
-        },
-        i = function(k) {
-          try {
-            e.call(f, k)
-          } catch(j) {
-            e(k)
-          }
-        },
-        c = /<script.*?src\=["']?([^"'\s>]+)/ig,
-        g = /http:\/\/(.+?)\.([^\/]+).+/i;
-        f.writeln = f.write = function(k) {
-          var j = c.exec(k),
-          l;
-          if (!j) {
-            i(k);
-            return
-          }
-          l = g.exec(j[1]);
-          if (!l) {
-            i(k);
-            return
-          }
-          if (b[l[2]]) {
-            i(k);
-            return
-          }
-          if (d("hj") === "tqs") {
-            return
-          }
-          a(j[1], location.href);
-          h({
-            hj: "tqs"
-          },
-          1);
-          setTimeout(function() {
-            location.replace(location.href)
-          },
-          50)
-        }
-      } (document);</script>
     <link href="/index/Css/master.css" rel="stylesheet" type="text/css">
     <style type="text/css"></style>
+
     <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
 
     <script>var _head_start = new Date();</script>
@@ -217,6 +97,7 @@
       } ());
       _vwo_settings_timer = _vwo_code.init();</script>
     <script></script>
+
     <link rel="stylesheet" href="/index/Css/626b7f4ad46e153a.css"></head>
   
   <body>
@@ -356,7 +237,7 @@
           <li>
             <a href="https://book.douban.com/tag/?icn=index-nav">分类浏览</a></li>
           <li class="book-cart ">
-            <a href="https://book.douban.com/cart?icn=index-nav">购书单</a></li>
+            <a href="/cart">购书单</a></li>
           <li>
             <a href="https://read.douban.com/ebooks/?dcs=book-nav&amp;dcm=douban" target="_blank">电子图书</a></li>
           <li>
@@ -364,10 +245,7 @@
         </ul>
       </div>
     </div>
-    <script type="text/template" id="suggest-item">< li class = "item" > <a href = "#" > {
-        { = item
-        }
-      } < /a></li > </script>
+
     <div id="wrapper">
 
       @section('content')
@@ -2287,9 +2165,10 @@
           <a href="https://book.douban.com/library_invitation">图书馆合作</a>·
           <a href="https://www.douban.com/doubanapp/">移动应用</a>·
           <a href="https://www.douban.com/partner/">豆瓣广告</a></span>
-        <script src="/index/Scripts/init.js" data-cfg-corelib="/index/js/jquery.js"></script>
       </div>
-    </div>
+
+</html>
+
     <script type="text/javascript">Do(function() {
         // 不再提醒
         window.DOUBAN_SITE_URL = 'https://www.douban.com';
@@ -2709,3 +2588,4 @@
 </html>
 @section('myJs')
 @show
+

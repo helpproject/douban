@@ -23,6 +23,11 @@ Route::post('/admin/login','AdminController@adoLogin');
 
 	//分类页面
 	Route::get('/cate','CateController@index');
+	Route::get('/cate/hot','CateController@hot');
+
+
+	//分类页面
+	Route::get('/cate','CateController@index');
 
 Route::get('/login','UserController@login');
 Route::post('/login','UserController@dologin');
@@ -57,6 +62,12 @@ Route::get('/doattention','AttentionController@delete');
 	Route::post('/forget','UserController@doforget');
 	Route::get('/reset','UserController@reset');
 	Route::post('/reset','UserController@doreset');
+	//图书详情页面
+	Route::get('/subject/{id}','BookController@show');
+	//图书分类页面
+	Route::get('/tag/{id}','BookController@tag');
+	//添加购物车
+	Route::get('/getCart','CartController@getCart');
 
 
 
@@ -103,6 +114,20 @@ Route::group(['middleware'=>'login'],function(){
 	// 获取市区的信息
 	Route::get('/getCity','OrderController@getCity');
 
+	/********* 前台 *********/
+	
+	//购物车页面
+	Route::get('/cart','CartController@cart');
+	//购物车操作
+	Route::get('/getDelete','CartController@getDelete');
+	//添加收货地址
+	Route::post('/insetAddress','CartController@insetAddress');
+	//创建订单地址
+	Route::post('/Order/create','OrderController@create');
+
+	Route::get('/Order/changeStatus','OrderController@changeStatus');
+	//订单详情
+	Route::get('/ordercart','OrderController@ordercart');
 		
 
 });

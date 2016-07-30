@@ -12,6 +12,14 @@ class Books extends Model
     	return $this->belongsTo('App\Cate');
     }
 
+
+    //声明图书和关联表
+    public function bk_ar()
+    {
+    	return $this->hasOne('App\Bk_ar');
+    }
+
+
     public function author()
     {
         return $this->belongsTo('App\Author');
@@ -19,7 +27,9 @@ class Books extends Model
 
 
 
+
    
+
 
 
 

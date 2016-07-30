@@ -12,6 +12,19 @@ class CreateOrdersTable extends Migration
      */
     public function up()
     {
+
+        Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id')->comment('主键自增id');
+            $table->string('num')->comment('订单号');
+            $table->string('user_id')->comment('用户的id');
+            $table->decimal('total')->comment('总价');
+            $table->string('address_id')->comment('收货地址id');
+            $table->string('paytype')->comment('支付方式');
+            $table->string('status')->comment('订单状态');
+
+            $table->timestamps();
+        });
+
 //        Schema::create('orders', function (Blueprint $table) {
 //            $table->increments('id')->comment('主键自增id');
 //            $table->string('name')->comment('姓名');
@@ -25,6 +38,7 @@ class CreateOrdersTable extends Migration
 //            $table->tinyInteger('status')->comment('状态 0为不默认 1为默认')->default(0);
 //            $table->timestamps();
 //        });
+>>>>>>> a1d21c9ec392fc0ac96ef53741e43252793677d4
     }
 
     /**
@@ -34,6 +48,6 @@ class CreateOrdersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('orders');
+        // Schema::drop('orders');
     }
 }

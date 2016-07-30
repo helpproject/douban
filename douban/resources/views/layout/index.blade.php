@@ -125,7 +125,7 @@
                   </tr>
                   <tr>
                     <td>
-                      <a target="_blank" href="">帐号管理</a></td>
+                      <a target="" href="/account">帐号管理</a></td>
                   </tr>
                   <tr>
                     <td>
@@ -226,7 +226,7 @@
         <ul class="nav-items">
           @if(session('uid'))
           <li class="nav-item-first">
-            <a href="">我读</a></li>
+            <a href="/mine/{{session('uid')}}">我读</a></li>
           <li>
             <a href="/dongtai/{{session('uid')}}">动态</a></li>
           <li>

@@ -32,7 +32,9 @@
                     <div class="mws-form-item">
                         <select class="small" name="cate_id">
                         <option value="0">请选择</option>
-                        <option value="1">男装</option>
+                        @foreach($cates as $k=>$v)
+                        <option value="{{$v->id}}">{{$v->name}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
@@ -66,6 +68,16 @@
                     <label class="mws-form-label">价格</label>
                     <div class="mws-form-item">
                         <input type="text" class="small" value="{{old('price')}}" name="price">
+                    </div>
+                </div>
+                
+                <div class="mws-form-row">
+                    <label class="mws-form-label">图书类型</label>
+                    <div class="mws-form-item clearfix">
+                        <ul class="mws-form-list inline">
+                            <li><input type="radio" name="nb" value="2" checked="checked"> <label>新书速递</label></li>
+                            <li><input type="radio" name="nb" value="3"> <label>最受关注</label></li>
+                        </ul>
                     </div>
                 </div>
 

@@ -41,6 +41,7 @@ class BookController extends Controller
         $books -> price = $request->input('price');
         $books -> cate_id = $request->input('cate_id');
         $books -> intro = $request->input('intro');
+        $books -> nb  = $request->input('nb');
         $books -> catalog = $request->input('catalog');
         $books -> ISBN = $request->input('ISBN');
         //检测图片文件
@@ -105,7 +106,7 @@ class BookController extends Controller
      * 商品的修改页面
      */
     public function getEdit(Request $request)
-    {
+    {   $cates = CateController::getAllCates();
         //获取id
         $id = $request -> input('id');
         //信息读取
@@ -113,7 +114,8 @@ class BookController extends Controller
         //显示模板
         return view('admin.book.edit',[
             'info'=>$info,
-            'title'=>'图书修改页面'
+            'title'=>'图书修改页面',
+            'cates'=>$cates
             ]);
     }
 
@@ -209,7 +211,7 @@ class BookController extends Controller
     {
         //读取图书的详细信息
         $books = Books::find($id);
-        $author_id = $books->bk_ar->author_id;
+        $author_id = $books->author->id;
         $author = Author::where('id',$author_id)->firstOrFail();
         //解析模板
         return view('index.book.detail',[
@@ -218,22 +220,87 @@ class BookController extends Controller
             ]);
     }
 
-    public function tag($id)
+    public function tag(Request $request)
     {
+
         //读取分类下图书的信息
-        $books = Books::where('cate_id',$id)->simplePaginate(10);
+        $books = Books::where(function($query)use($request){
+                // 检测关键是否传递
+                if(!empty($request->input('q'))){
+                    $query->where('title','like','%'.$request->input('q').'%');
+                }
+                $cates = Cate::where(function($query)use($request){
+                if(!empty($request->input('cate'))){
+                    $query->where('name','like','%'.$request->input('cate').'%');
+                    }
+                })->firstOrFail();
+                $catesid = $cates->id;
+                // 检测是否有分类id
+                if(!empty($request->input('cate_id'))){
+                    $query->where('cate_id',$request->input('cate_id'));
+                }else{
+                    if(!empty($request->input('cate'))){
+                        $query->where('cate_id',$catesid);
+                    }
+                }
+            })
+            ->paginate(10);
         //读取分类
-        $cate = Cate::where('id',$id)->firstOrFail();
-        //读取作者信息
-        // $author_id = $books->bk_ar->author_id;
-        // dd($author_id);
-        // dd($cate);
+        $cate = Cate::where(function($query)use($request){
+            $cates = Cate::where(function($query)use($request){
+            if(!empty($request->input('cate'))){
+                $query->where('name','like','%'.$request->input('cate').'%');
+                }
+            })->firstOrFail();
+            $catesid = $cates->id;
+            if(!empty($request->input('cate_id'))){
+                $query->where('id',$request->input('cate_id'));
+            }else{
+                $query->where('id',$catesid);
+            }
+        })->firstOrFail();
+
+        //读取相同分类
+        $pat =  $cate->path;
+        $path = Cate::where('path',$pat)->get();
+
         //解析模板
         return view('index.book.tag',[
             'title'=>'豆瓣图书列表',
             'books'=>$books,
             'cate'=>$cate,
+            'path'=>$path,
+            'request'=>$request
             ]);
     }
  
+    public function tags(Request $request)
+    {
+        $type = $request->input('type');
+        if($type == "R"){
+            $books = Books::where(function($query)use($request){
+                if(!empty($request->input('id'))){
+                    $query->where('cate_id',$request->input('id'));
+                }
+            })->orderBy('pressdate','desc')->paginate(10);
+        }
+        //读取分类
+        $cate = Cate::where(function($query)use($request){
+            if(!empty($request->input('id'))){
+                $query->where('id',$request->input('id'));
+            }
+        })->firstOrFail();
+        //读取相同分类
+        $pat =  $cate->path;
+        $path = Cate::where('path',$pat)->get();
+
+        return view('index.book.tags',[
+            'title'=>'豆瓣图书列表',
+            'books'=>$books,
+            'cate'=>$cate,
+            'path'=>$path,
+            'request'=>$request
+            ]);
+        
+    }
 }

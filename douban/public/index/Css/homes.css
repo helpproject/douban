@@ -1,0 +1,13 @@
+#primary-menu .sf-js-enabled  li a{
+	font-family:microsoft yahei;
+	font-weight: normal;
+	font-size: 14px;
+}
+
+#content{
+	font-family:microsoft yahei;
+}
+
+ul.tab-nav:not(.tab-nav-lg) li a{
+	font-weight: normal;
+}

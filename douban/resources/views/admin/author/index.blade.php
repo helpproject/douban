@@ -42,7 +42,7 @@
           <tr class="@if($k%2==0) even @else odd @endif">
             <td class=" sorting_1">{{$v->id}}</td>
             <td class=" ">{{$v->name}}</td>
-            <td class=" "><textarea name="" id="" cols="10" rows="2" style="resize:none;">{{$v->abstract}}</textarea></td>
+            <td class=" "><textarea name="" id="" cols="40" rows="2" style="resize:none;">{{$v->abstract}}</textarea></td>
             <td class=" "><input cid="{{$v->id}}" class="ibutton" type="checkbox" @if($v->status) checked="checked" @endif></td>
             <td class=" ">
               <a class="icol-pencil" href="/admin/author/edit?id={{$v->id}}"></a>
@@ -132,9 +132,15 @@
           // 发送
           $.get('/admin/author/ajax-update',{status:status,id:id},function(data){
               if(data == '1'){
-                alert('更新成功');
+                $('#tx').css('background','＃00CC00').html('更新成功').fadeIn();
+                setTimeout(function(){
+                  $('#tx').fadeOut();
+                },1000);
               }else{
-                alert('更新失败');
+                $('#tx').css('background','red').html('更新失败').slideDown();
+                setTimeout(function(){
+                  $('#tx').slideUp();
+                },2000);
               }
           })
         })

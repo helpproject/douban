@@ -27,15 +27,7 @@
                     </div>
                 </div>
                 
-
                 <div class="mws-form-row">
-                    <label class="mws-form-label">图书ID</label>
-                    <div class="mws-form-item">
-                        <input type="text" class="small" value="{{$info->book_id}}" name="book_id">
-                    </div>
-                </div>
-
-                 <div class="mws-form-row">
                     <label class="mws-form-label">作者简介</label>
                     <div class="mws-form-item">
                         <textarea rows="" cols="" class="small" name="abstract">{{$info->abstract}}</textarea>

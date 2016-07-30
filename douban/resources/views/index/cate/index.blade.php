@@ -44,13 +44,13 @@
           <div class="article">
             <div class="tag-view-type clearfix">
               <span class="rr greyinput">分类浏览 /
-                <a href="/cate/hot">所有热门标签</a></span>
+                <a href="https://book.douban.com/tag/?view=cloud">所有热门标签</a></span>
             </div>
             <div class="">
               @foreach($cates as $k=>$v)
               <div class="">
-                
-                  <h2 style="padding-top:10px">{{$v->name}} · · · · · ·</h2>
+                <a name="{{$v->name}}" class="tag-title-wrapper">
+                  <h2 style="padding-top:10px">{{$v->name}} · · · · · ·</h2></a>
 
 
                 <table class="tagCol">
@@ -59,17 +59,20 @@
                     
                     <tr>
                     @foreach($v->subcate as $key=>$value)
-                               
+                           
+                      
                      @if($key%4 == 0) 
                      </tr><tr>
                      @endif
                      <td>
-                        <a href="/list/{{$value->id}}">{{$value->name}}</a>
+                        <a href="/tag?cate_id={{$value->id}}">{{$value->name}}</a>
                         <b>(41162)</b><br>
                       </td>
                     @endforeach                     
-                    </tr>                                    
-                  </tbody>                  
+                    </tr>
+                                    
+                  </tbody>
+                  
                 </table>
               </div>
               @endforeach

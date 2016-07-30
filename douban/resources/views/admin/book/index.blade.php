@@ -39,7 +39,6 @@
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">图书页数</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">国家标准书号</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">图书价格</th>
-            <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">图书简介</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">状态</th>
             <th class="sorting" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 100px;">操作</th>
           </tr>
@@ -49,14 +48,13 @@
           <tr class="@if($k%2==0) even @else odd @endif">
             <td class=" sorting_1">{{$v->id}}</td>
             <td class=" ">{{$v->title}}</td>
-            <td class=" ">{{$v->cate_id}}</td>
+            <td class=" ">{{$v->cate->name}}</td>
             <td class=" "><img src="{{$v->img}}" width="30" alt=""> </td>
             <td class=" ">{{$v->press}}</td>
             <td class=" ">{{$v->pressdate}}</td>
             <td class=" ">{{$v->pagination}}</td>
             <td class=" ">{{$v->ISBN}}</td>
             <td class=" ">{{$v->price}}元</td>
-            <td class=" "><textarea name="" id="" cols="10" rows="4">{{$v->intro}}</textarea></td>
             <td class=" "><input cid="{{$v->id}}" class="ibutton" type="checkbox" @if($v->status) checked="checked" @endif></td>
             <td class=" ">
               <a class="icol-pencil" href="/admin/book/edit?id={{$v->id}}"></a>
@@ -146,9 +144,15 @@
           // 发送
           $.get('/admin/book/ajax-update',{status:status,id:id},function(data){
               if(data == '1'){
-                alert('更新成功');
+                $('#tx').css('background','＃00CC00').html('更新成功').fadeIn();
+                setTimeout(function(){
+                  $('#tx').fadeOut();
+                },1000);
               }else{
-                alert('更新失败');
+                $('#tx').css('background','red').html('更新失败').slideDown();
+                setTimeout(function(){
+                  $('#tx').slideUp();
+                },2000);
               }
           })
         })

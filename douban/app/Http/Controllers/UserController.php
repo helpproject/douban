@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Mail;
 use Config;
 use Image;
-use App\Readbook;
-use App\Books;
-use App\Attention;
 use App\User;
 use App\Http\Requests;
 use App\Http\Requests\ZcRequest;
@@ -35,7 +31,7 @@ class UserController extends Controller
             'email'=>'required|regex:/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/',
             'phone'=>'required|regex:/^1\d{10}$/',
             'city'=>'required',
-            'nickname'=>'required|regex:/^\w{3,8}$/'
+            'nickname'=>'required|regex:/^\w{3,8}$/|unique:users'
         ],[
             'username.required' => '用户名不能为空',
             'username.unique'=>'用户名已经存在',
@@ -197,8 +193,7 @@ class UserController extends Controller
     }
 
     public function adoLogin(LoginRequest $request)
-    {   
-        
+    {
         $password = $request->input('password');
         $info = user::where('username',$request->input('username'))->first();
         // dd($info['password']);
@@ -398,6 +393,8 @@ class UserController extends Controller
             'user'=>$user
         ]);
     }
+    
+
 
 
     public function dosuicide(Request $request){
@@ -411,71 +408,6 @@ class UserController extends Controller
         }
         }
         
-    
-    
-    
-    public function Mine($id){
-        $user = User::findOrFail($id);
-        $iid = session('uid');
-        $usera = User::where('id',$iid)->firstOrFail();
-        $username =  $usera->username;
-        $attention = Attention::where('username',$username)->where('attention_name',$user->username)->first();
-        $attentions = Attention::where('username',$user->username)->get();
-        $attentions2 = Attention::where('username',$user->username)->take(8)->orderBy('id','desc')->get();
-       $atten = [];
-        foreach($attentions as $k=>$v) {
-            $atten[] = User::where('username',$v['attention_name'])->first();
-        }
-        $atten2 = [];
-        foreach($attentions2 as $k=>$v) {
-            $atten2[] = User::where('username',$v['attention_name'])->first();
-        }
-        
-        $readbook = Readbook::where('user_id',$user->id)->where('status',1)->get();
-        $readbook2 = Readbook::where('user_id',$user->id)->where('status',2)->get();
-        $readbook3 = Readbook::where('user_id',$user->id)->where('status',3)->get();
-        $ibooks=[];
-        foreach ($readbook as $k=>$v) {
-            $ibooks[]= Books::where('id', $v['book_id'])->first();
-        }
-        $rbooks=[];
-        foreach ($readbook2 as $k=>$v) {
-            $rbooks[]= Books::where('id', $v['book_id'])->first();
-        }
-        $zbooks=[];
-        foreach ($readbook3 as $k=>$v) {
-            $zbooks[]= Books::where('id', $v['book_id'])->first();
-        }
-        if(empty($attention)){
-          $c = 1;
-        }
-        else{
-            $c = 2;
-        }
-
-//
-//        $attention = Attention::where('username',$username)->get();
-//
-//        $a = $attention->where('attention_name',$user->username)->first();
-
-
-//        $img = Image::make('.'.$user->profile)->resize(300,300)->;
-//        $attention = Attention::where('username',$user->username)->where()
-        return view('/index/user/mine',[
-            'user'=>$user,
-            'c'=>$c,
-            'ibook'=>$ibooks,
-            'rbook'=>$rbooks,
-            'zbook'=>$zbooks,
-            'attentions'=>$attentions,
-            'atten'=>$atten,
-            'atten2'=> $atten2
-
-//            'usera'=>$usera,
-//            'a'=>$a
-        ]);
-        
-    }
 //    public function upimage(Request $request){
 //        $data = $request->except(['id']);
 //        if($request->hasFile('profile')){
@@ -492,13 +424,4 @@ class UserController extends Controller
 //            echo '0';die;
 //        }
 //    }
-
-    public function zhanneixin($id) {
-       $user = User::where('id',$id)->first();
-
-        return view('index.user.zhanneixin',[
-            'user'=>$user
-        ]);
-    }
-
 }

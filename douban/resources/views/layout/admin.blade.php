@@ -258,6 +258,13 @@
                         <li><a href="/admin/attention">关注列表</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#"><i class="icon-list"></i> 商品管理</a>
+                    <ul class="closed">
+                        <li><a href="/admin/good/add">商品添加</a></li>
+                        <li><a href="/admin/good/index">商品列表</a></li>
+                    </ul>
+                </li>
 
                 <li>
                     <a href="#"><i class="icon-book"></i> 图书管理</a>
@@ -301,6 +308,7 @@
     @endif
     <!-- Inner Container Start -->
         <div class="container">
+            <button type="button" id="tx" class="btn btn-primary btn-large" style="z-index:100;position: absolute;width:200px;left:432px;top:200px;display:none">Blue</button>
             @section('content')
 
             @show

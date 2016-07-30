@@ -144,9 +144,15 @@
           // 发送
           $.get('/admin/order/ajax-update',{status:status,id:id},function(data){
               if(data == '1'){
-                alert('更新成功');
+                $('#tx').css('background','＃00CC00').html('更新成功').fadeIn();
+                setTimeout(function(){
+                  $('#tx').fadeOut();
+                },1000);
               }else{
-                alert('更新失败');
+                $('#tx').css('background','red').html('更新失败').slideDown();
+                setTimeout(function(){
+                  $('#tx').slideUp();
+                },2000);
               }
           })
         })

@@ -25,7 +25,7 @@ class OrderControllerRequest extends Request
     {
         return [
             'name' => 'required',
-            'phone' => 'required|regex:/^1\d{10}$/',
+            'phone' => 'required|regex:/^1\d{10}$/|unique:orders',
             'sheng' => 'required|numeric',
             'shi' => 'required|numeric',
             'xian' => 'required|numeric',

@@ -30,7 +30,9 @@
                     <div class="mws-form-item">
                         <select class="small" name="cate_id">
                         <option value="0">请选择</option>
-                        <option value="1">男装</option>
+                        @foreach($cates as $k=>$v)
+                        <option value="{{$v->id}}" @if($info->cate_id == $v->id) selected="selected" @endif>{{$v->name}}</option>
+                        @endforeach
                     </select>
                     </div>
                 </div>
@@ -75,13 +77,6 @@
                     <label class="mws-form-label">内容简介</label>
                     <div class="mws-form-item">
                         <textarea rows="" cols="" class="small" name="intro">{{$info->intro}}</textarea>
-                    </div>
-                </div>
-
-                <div class="mws-form-row">
-                    <label class="mws-form-label">作者简介</label>
-                    <div class="mws-form-item">
-                        <textarea rows="" cols="" class="small" name="author">{{$info->author}}</textarea>
                     </div>
                 </div>
 

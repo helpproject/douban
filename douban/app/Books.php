@@ -12,19 +12,18 @@ class Books extends Model
     	return $this->belongsTo('App\Cate');
     }
 
-
     //声明图书和关联表
     public function bk_ar()
     {
     	return $this->hasOne('App\Bk_ar');
     }
 
-
     public function author()
     {
         return $this->belongsTo('App\Author');
     }
 
+<<<<<<< HEAD
     public function order()
     {
         return $this->belongsToMany('App\Order');
@@ -36,4 +35,7 @@ class Books extends Model
 
 
 
+=======
+     public $timestamps = false;
+>>>>>>> 787e14e4884fc87fe9bb03b5139e563623e0fff4
 }

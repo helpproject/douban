@@ -1,17 +1,6 @@
 @extends('layout.index')
 
 @section('content')
-<style>
-  .lnk-doulist-add i {
-    display: inline-block;
-    zoom: 1;
-    width: 10px;
-    height: 16px;
-    vertical-align: middle;
-    overflow: hidden;
-    background: #fff url(/index/Images/add-doulist.gif) no-repeat 0 0;
-}
-</style>
       <h1>
         <span property="v:itemreviewed">{{$books->title}}</span>
         <div class="clear"></div>
@@ -29,7 +18,7 @@
                   </div>
                   <div id="info" class="">
                     <span>
-                      <span class="pl">作者:{{$books->author->name}}</span>
+                      <span class="pl">作者::{{$books->author->name}}</span>
                       <a class="" href="#"></a></span>
                     <br/>
                     <span class="pl">出版社:</span>{{$books->press}}
@@ -55,7 +44,6 @@
                             <a href="collections" class="rating_people">
                               <span property="v:votes">19</span>人评价</a></span>
                         </div>
-
                       </div>
                     </div>
                     <span class="stars5 starstop" title="力荐">5星</span>
@@ -135,16 +123,11 @@
                   <li>
                     <span class="rr">
                       <img src="/index/Images/add-cart.gif" />
-
-
-
-
-
-                        <span style="display:none" class="gouwuche">已在<a href="/cart">购书单</a></span>
-                        
-                        <a id="gouwu" aid="{{$books->id}}" cli="0" name="26760976" href="javascript:;">加入购书单</a>                   
+                      <a name="26760976" class="j a_add2cart" href="javascript:;">加入购书单</a>
+                      <span class="hidden">已在
+                        <a href="/index/Images/add-review.gif">购书单</a></span>
                     </span>
-                    <br class="clearfix" /></li>&nbsp;
+                    <br class="clearfix" /></li>
                   <li>
                     <div class="doulist-add-btn">
                       <a href="javascript:void(0)" data-id="26760976" data-cate="1001" data-canview="True" data-url="https://book.douban.com/subject/26760976/" data-catename="图书" data-link="https://www.douban.com/people/148026085/doulists/all?add=26760976&amp;cat=1001" data-title="怒" data-picture="https://img1.doubanio.com/lpic/s28873148.jpg" class="lnk-doulist-add" onclick="moreurl(this, { 'from':'doulist-btn-1001-26760976-148026085'})">
@@ -154,7 +137,23 @@
                   </li>
                   <li class="rec" id="C-26760976">
                     <a href="#" data-url="https://book.douban.com/subject/26760976/" data-desc="" data-title="书籍《怒》 (来自豆瓣) " data-pic="https://img1.doubanio.com/lpic/s28873148.jpg" class="bn-sharing ">分享到</a>&nbsp;&nbsp;</li>
-                 
+                  <script>var __cache_url = __cache_url || {}; (function(u) {
+                      if (__cache_url[u]) return;
+                      __cache_url[u] = true;
+                      window.DoubanShareIcons = 'https://img3.doubanio.com/f/shire/d15ffd71f3f10a7210448fec5a68eaec66e7f7d0/pics/ic_shares.png';
+                      var initShareButton = function() {
+                        $.ajax({
+                          url: u,
+                          dataType: 'script',
+                          cache: true
+                        });
+                      };
+                      if (typeof Do == 'function' && 'ready' in Do) {
+                        Do('https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css', 'https://img3.doubanio.com/f/shire/4b3bad5e25de78678d700dd5353570dce3e6bbcc/js/ui/dialog.js', initShareButton);
+                      } else if (typeof Douban == 'object' && 'loader' in Douban) {
+                        Douban.loader.batch('https://img3.doubanio.com/f/shire/8377b9498330a2e6f056d863987cc7a37eb4d486/css/ui/dialog.css', 'https://img3.doubanio.com/f/shire/4b3bad5e25de78678d700dd5353570dce3e6bbcc/js/ui/dialog.js').done(initShareButton);
+                      }
+                    })('https://img3.doubanio.com/f/shire/3c817e21c473629a7e5fd09ca7f4eadf5ef24012/js/lib/sharebutton.js');</script>
                 </ul>
               </div>
               <script>var rec_url = 'https://www.douban.com/share/recommend?'</script>
@@ -163,6 +162,10 @@
                 <span class="rec">
                   <a href="https://www.douban.com/share/recommend?sanity_key=_e38e0&amp;apikey=&amp;name=%E6%80%92&amp;image=https%3A%2F%2Fimg1.doubanio.com%2Fspic%2Fs28873148.jpg&amp;redir=https%3A%2F%2Fbook.douban.com%2Fsubject%2F26760976%2F&amp;href=https%3A%2F%2Fbook.douban.com%2Fsubject%2F26760976%2F&amp;curl=&amp;type=book&amp;properties=%7B%22rating%22%3A%228.0%22%7D&amp;desc=%5B%E6%97%A5%5D+%E5%90%89%E7%94%B0%E4%BF%AE%E4%B8%80+%2F+%E4%B8%96%E7%BA%AA%E6%96%87%E6%99%AF%2F%E4%B8%8A%E6%B5%B7%E4%BA%BA%E6%B0%91%E5%87%BA%E7%89%88%E7%A4%BE" share-id="26760976" data-mode="plain" data-name="怒" data-type="book" data-desc="[日] 吉田修一 / 世纪文景/上海人民出版社" data-href="https://book.douban.com/subject/26760976/" data-image="https://img1.doubanio.com/spic/s28873148.jpg" data-properties="{&#34;rating&#34;:&#34;8.0&#34;}" data-redir="https://book.douban.com/subject/26760976/vote?ck=UPr1" data-text="" data-apikey="" data-curl="" data-count="10" data-object_kind="1001" data-object_id="26760976" data-target_type="rec" data-target_action="0" data-action_props="{&#34;subject_url&#34;:&#34;https:\/\/book.douban.com\/subject\/26760976\/&#34;,&#34;subject_title&#34;:&#34;怒&#34;}" data-sanity_key="_e38e0" class="lnk-sharing lnk-douban-sharing">推荐</a></span>
               </div>
+              <script>//bind events for collection button.
+                $('.collect_btn', '#interest_sect_level').each(function() {
+                  Douban.init_collect_btn(this);
+                });</script>
             </div>
             <br clear="all">
             <div id="collect_form_26760976"></div>
@@ -278,8 +281,7 @@
                       delete_comment(e);
                     }
                   });
-                })();
-                </script>
+                })();</script>
               <div id="reviews" class="ugc-mod">
                 <h2 class="clearfix">书评&nbsp;&nbsp;· · · · · ·&nbsp;</h2>
                 <a class="redbutt rr" href="https://book.douban.com/subject/26760976/new_review" rel="nofollow">
@@ -632,8 +634,7 @@
                   <span>在这本书的论坛里发言</span></a>
               </div>
             </div>
-            <script type="text/javascript">
-            $(function() {
+            <script type="text/javascript">$(function() {
                 if ($.browser.msie && $.browser.version == 6.0) {
                   var maxWidth = parseInt($('#info').css('max-width'));
                   if ($('#info').width() > maxWidth) $('#info').width(maxWidth)
@@ -807,67 +808,37 @@
               <p class="pl">&gt;
                 <a href="https://book.douban.com/subject/26760976/wishes">713人想读</a></p>
             </div>
-            <div class="pop_win" style="display: none; left: 50%; top: 50%; margin-left: -280px; margin-top: -150px; visibility: visible; z-index: 9999;">
-              <a class="pop_win_close" href="javascript:;" onclick="pop_win.close()">X</a>
-              <style type="text/css">.captcha_image {height:40px; padding-left:20px;} a.pop_win_close { top: 5px } .pop_win { padding: 0 } .pop_win h3 { font-size: 14px; padding: 12px 10px 8px 10px; margin: 0; color: #006600; background: #ebf5eb; *height: auto } .dui-dialog .hd h3 { color: #006600 } .pop_win h3 span, .dui-dialog .hd h3 span { color: #888; font-size: 12px } .pop_win h3 a, .dui-dialog .hd h3 a { font-size: 12px } #pop_win_login { width:560px; padding: 10px } #pop_win_login form { width: 280px; border: none } #pop_win_login fieldset { border: 0 none; padding: 0; margin: 0 } #pop_win_login .item { margin: 15px 0 12px 0; overflow: visible } #pop_win_login label { display: inline-block; float:left; margin-right: 15px; text-align: right; width: 30px; font-size: 14px; line-height: 30px; vertical-align: baseline } #pop_win_login label.sub { font-size: 12px; display: inline; width: auto; text-align: left; float: none; margin: 0; color: #666 } #pop_win_login input { vertical-align: middle } #pop_win_login .text { width: 200px; padding: 5px; height: 18px; font-size: 14px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; border: 1px solid #c9c9c9 } #pop_win_login .text:focus { border: 1px solid #a9a9a9 } .captcha_block { margin-top:1em; } .device-mobile #pop_win_login { width:auto; } .device-mobile #pop_win_login form { width:auto; } .device-mobile #pop_win_login .item { margin:0 0 5px;overflow:hidden; } .device-mobile #pop_win_login label { margin-right: 5px; width: 30px; } .device-mobile #pop_win_login .text { width: 70%; padding: 2px; height: auto; font-size: 14px; } .device-mobile #captcha_field { padding:2px;width:30% } .device-mobile #captcha_image { padding:0; } .device-mobile .captcha_block { margin-top:5px; } .device-mobile .recsubmit { padding-top:10px; } /* BY RYAN KUNG */ .device-mobile .dui-dialog-content h3 {font-size:16px;} .device-mobile .dui-dialog-content h3 span{font-size:14px;} .device-mobile a.dui-dialog-close {font-size: 20px;} /* .device-mobile #pop_win_login {padding:0;} .device-mobile #pop_win_login .item .text{width:65%; padding:8px;} .device-mobile #pop_win_login .item {margin:10px 0;} .device-mobile #pop_win_login .item label {float:none;display:inline-block;} .device-mobile #pop_win_login .item #remember {height:30px;} .device-mobile #pop_win_login .recsubmit label {display:none;} .device-mobile #pop_win_login .recsubmit .bn-flat{margin:0;} .device-mobile #pop_win_login .recsubmit .bn-flat input{font-size:16px; height:40px; padding:0 40%;} .device-mobile #pop_win_login .remember {padding:10px 0;} .device-mobile #pop_win_login label {height:30px; width:auto;} .device-mobile #pop_win_login a{line-height:30px;display:inline-block;} .device-mobile #captcha_field { padding:2px;width:30% } .device-mobile #captcha_image { padding:0; } .device-mobile .captcha_block { margin-top:5px; } */ #pop_win_login { padding:0; } .book-pop-login form { padding-left: 10px; } #pop_win_login form { float:left;border-right: 1px solid #E0E1E0; padding-left: 10px; } #pop_win_login .alternative { float: left; margin-left: 20px; padding: 7px } #pop_win_login .alternative p { color: #666 } #pop_win_login .alternative p.redirect { margin-top: 6.5em; } #pop_win_login .alternative ul { margin-top: 25px; } #pop_win_login .alternative li { display:inline-block;*display:inline;zoom:1;vertical-align:top;color:#333;margin-right:10px; } #pop_win_login .alternative a.signin { display:inline-block;*display:inline;zoom:1;border:1px solid #dcdcdc;height:30px;width:54px;padding:0 5px 0 36px;line-height:30px;cursor:pointer; -moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; } #pop_win_login .alternative a.signin:hover { color:#666; } #login_sina { background:url(/pics/ic_3rd_login.png) no-repeat 5px 5px; } #login_qq { background:url(/pics/connect_qq.png) no-repeat 5px 7px; } #pop_win_login #login_msn { background:url(/pics/msn_login_btn.png) no-repeat 7px 6px;padding-left:44px; width:46px;} div.login_notice_from_subject {background:#FFF7BE; padding:1em; text-align:center; font: 12px, Arial,Helvetica,sans-serif;}</style>
-              <h3>登录豆瓣读书
-                <span>(
-                  <a href="https://www.douban.com/accounts/register">还没有注册?</a>)</span></h3>
-              <div class="book-pop-login" id="pop_win_login">
-                <form action="/login" method="post" name="pop_win_login_form" id="pop_win_login_form" class="pop_win_login_form">
-                  <fieldset>
-                    <input type="hidden" value="book" name="source">
-                    <div class="item">
-                      <label for="form_email">帐号</label>
-                      <input type="text" class="text pop_email" name="username" id="form_email" tabindex="1"></div>
-                    <div class="item">
-                      <label for="form_password">密码</label>
-                      <input type="password" class="text" id="pop_password" name="password" tabindex="2"></div>
-                    
-                    <div class="item remember">
-                      <label>&nbsp;</label>
-                      <a style="margin-left: 0.8em;" href="https://www.douban.com/accounts/resetpassword">忘记密码了</a></div>
-                    <div class="item recsubmit">
-                      <label>&nbsp;</label>
-                      <div>
-                        <span class="bn-flat">
-                          {{csrf_field()}}
-                          <input type="submit" value="登录"></span>
-                          
-                      </div>
-                    </div>
-                  </fieldset>
-                </form>
-                <div class="alternative">
-                    <img src="/index/Images/douban.png" style="width:100px;padding:20px" alt="">
-                </div>
-              </div>
-            </div>
             <!-- douban ad begin -->
             <div id="dale_book_subject_middle_right"></div>
-        
+            <script type="text/javascript">(function(global) {
+                if (!document.getElementsByClassName) {
+                  document.getElementsByClassName = function(className) {
+                    return this.querySelectorAll("." + className);
+                  };
+                  Element.prototype.getElementsByClassName = document.getElementsByClassName;
+
+                }
+                var articles = global.document.getElementsByClassName('article'),
+                asides = global.document.getElementsByClassName('aside');
+
+                if (articles.length > 0 && asides.length > 0 && articles[0].offsetHeight >= asides[0].offsetHeight) { (global.DoubanAdSlots = global.DoubanAdSlots || []).push('dale_book_subject_middle_right');
+                }
+              })(this);</script>
+            
+            
           </div>
           <div class="extra">
             <!-- douban ad begin -->
             <div id="dale_book_subject_bottom_super_banner"></div>
+            <script type="text/javascript">(function(global) {
+                var body = global.document.body,
+                html = global.document.documentElement;
+
+                var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+                if (height >= 2000) { (global.DoubanAdSlots = global.DoubanAdSlots || []).push('dale_book_subject_bottom_super_banner');
+                }
+              })(this);</script>
+            <!-- douban ad end --></div>
+        </div>
       </div>
-      <script type="text/javascript">
-          $(function(){
-            $('#gouwu').click(function(){
-              
-              var id = $(this).attr('aid');
-              $.get('/getCart',{id:id},function(data){
-                  if(data == '0'){
-                    $('.pop_win').show();
-                  }else{
-                    $('#gouwu').remove();        
-                    $('.gouwuche').css('display','inline');           
-                  }
-              },'json')
-            });
-          })
-          $('.pop_win_close').click(function(){
-            $('.pop_win').hide();
-          })
-      </script>
 @endsection

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Author;
+use DB;
 use App\Http\Requests\InsertAuthorRuquest;
 use App\Http\Controllers\Controller;
 class AuthorController extends Controller
@@ -23,13 +24,12 @@ class AuthorController extends Controller
     /**
      * 作者插入操作
      */
-    public function postInsert(AuthorInsertRequest $request)
+    public function postInsert(InsertAuthorRuquest $request)
     {
         $authors = new Author;
         $authors ->name = $request->input('name');
-        $authors ->book_id = $request->input('book_id');
         $authors ->abstract = $request->input('abstract');
-
+        
         if($authors->save()){
             return redirect('admin/author/index')->with('info','添加成功');
         }else{
@@ -64,10 +64,10 @@ class AuthorController extends Controller
 
     public function getEdit(Request $request)
     {   
-        $authors = Author::find($request->input('id'));
+        $info = Author::find($request->input('id'));
         // dd($info);
         return view('/admin/author/edit',[
-            'authors'=>$authors,
+            'info'=>$info,
             'title'=>'作者修改页面',
             ]);
     }

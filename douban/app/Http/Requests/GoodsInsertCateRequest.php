@@ -24,16 +24,15 @@ class GoodsInsertCateRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:books',
+            'title' => 'required',
             'press' => 'required',
             'pressdate' => 'required',
-            'pagination'=>'required|regex:/^\d+$/',
+            'pagination'=>'required|numeric',
             'price'=>'required|numeric',
             'cate_id'=>'required',
             'ISBN'=>'required|numeric',
             'img'=>'image',
             'intro'=>'required',
-            'catalog'=>'required',
         ];
     }
 
@@ -53,7 +52,6 @@ class GoodsInsertCateRequest extends Request
             'ISBN.required' => '国家标准书号不能为空',
             'img.image' => '图片格式不正确',
             'intro.required'=>'内容简介不能为空',
-            'catalog.required'=>'目录不能为空',
         ];
     }
 }

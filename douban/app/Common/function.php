@@ -9,4 +9,9 @@
 		return $res->areaname;
 	}
 
+	function getUser($id)
+	{
+		$res = DB::table('users')->where('id',$id)->first();
+		return $res->username;
+	}
  ?>

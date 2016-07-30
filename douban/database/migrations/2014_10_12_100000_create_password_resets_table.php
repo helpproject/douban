@@ -12,21 +12,19 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-
 <<<<<<< HEAD
-//        Schema::create('password_resets', function (Blueprint $table) {
-//            $table->string('email')->index();
-//            $table->string('token')->index();
-//            $table->timestamp('created_at');
-//        });
-
-=======
         // Schema::create('password_resets', function (Blueprint $table) {
         //     $table->string('email')->index();
         //     $table->string('token')->index();
         //     $table->timestamp('created_at');
         // });
->>>>>>> e9110a84b26bc1dc3dec40fe319b93739434a651
+=======
+//        Schema::create('password_resets', function (Blueprint $table) {
+//            $table->string('email')->index();
+//            $table->string('token')->index();
+//            $table->timestamp('created_at');
+//        });
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
     }
 
     /**
@@ -36,12 +34,10 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-
 <<<<<<< HEAD
-        Schema::drop('password_resets');
-=======
         // Schema::drop('password_resets');
->>>>>>> e9110a84b26bc1dc3dec40fe319b93739434a651
-
+=======
+        Schema::drop('password_resets');
+>>>>>>> 2ca7525e5383b0122b86bd669b09114c9b74c9c9
     }
 }

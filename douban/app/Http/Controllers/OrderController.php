@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Area;
 use App\Order;
 use App\Books;
+use App\User;
 use Config;
 use App\OrderGoods;
 use DB;
@@ -213,15 +214,22 @@ class OrderController extends Controller
     public function ordercart()
     {   
         $uid = session('uid');
-        $orderId = Order::where('user_id',$uid)->select('id')->get();
-        $orderGoodsId = [];
-        foreach ($orderId as $key => $value) {
-            echo '<pre>';
-            var_dump($value);
-            $orderGoodsId[] = OrderGoods::where('order_id',$value)->select('book_id')->get();
+        // $orderId = Order::where('user_id',$uid)->select('id')->get();
+        // // dd($orderId);
+        // $orderGoodsId = [];
+        // foreach ($orderId as $key => $value) {
+        //     // dd($value['id']) ;
+        //     $orderGoodsId[] = OrderGoods::where('order_id',$value['id'])->get();
 
+        // }
+        $orders = User::find($uid)->order;
+        $books = [];
+        foreach ($orders as $k => $v) {
+           foreach($v->books as $a => $b){
+            $books[$v->id][] = $b;
+           }
         }
-        // dd($orderGoodsId);
+        dd($books);
         return view('index.cart.ordercart',[
             
             ]);       

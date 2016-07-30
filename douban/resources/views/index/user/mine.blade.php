@@ -65,7 +65,7 @@
 
                                         @foreach($ibook as $k=>$v)
 
-                                        <a href="https://book.douban.com/subject/1230413/" class="cover"><img
+                                        <a href="/subject/{{$v['id']}}" class="cover"><img
                                                     alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
                                         @endforeach
                                     </li>
@@ -104,7 +104,7 @@
 
                                         @foreach($rbook as $k=>$v)
 
-                                            <a href="https://book.douban.com/subject/1230413/" class="cover"><img
+                                            <a href="/subject/{{$v['id']}}" class="cover"><img
                                                         alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
                                         @endforeach
                                     </li>
@@ -143,7 +143,7 @@
 
                                         @foreach($zbook as $k=>$v)
 
-                                            <a href="https://book.douban.com/subject/1230413/" class="cover"><img
+                                            <a href="/subject/{{$v['id']}}" class="cover"><img
                                                         alt="深入理解计算机系统" title=" {{$v['title']}}" src="{{$v['img']}}"></a>
                                         @endforeach
                                     </li>
@@ -502,7 +502,7 @@
                         &gt; <a href="https://book.douban.com/people/148026085/discussions">我回应的书评与讨论</a>
                     </p>
                 </div>
-
+        
 
             </div>
             <div class="extra">

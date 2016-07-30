@@ -25,7 +25,10 @@ class Books extends Model
         return $this->belongsTo('App\Author');
     }
 
-
+    public function order()
+    {
+        return $this->belongsToMany('App\Order');
+    }
 
 
    

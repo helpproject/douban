@@ -177,7 +177,7 @@ class ReadbookController extends Controller
        $ss[] = $user;
         $cc = [];
         foreach($ss as $k=>$v){
-            $cc[] = Readbook::where('user_id',$v['id'])->get();
+            $cc[] = Readbook::where('user_id',$v['id'])->orderBy('created_at','desc')->get();
         }
         $dd = [];
         foreach($cc as $k=>$v){

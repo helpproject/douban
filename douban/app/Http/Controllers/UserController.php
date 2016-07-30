@@ -379,7 +379,7 @@ class UserController extends Controller
         if($request->hasFile('profile')){
             $profile = $this->getUploadFileName($request);
             $data['profile'] = $profile?$profile:'';
-            $this->deleteProfile($request->input('id'));
+            // $this->deleteProfile($request->input('id'));
 
         }
 

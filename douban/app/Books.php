@@ -23,19 +23,12 @@ class Books extends Model
         return $this->belongsTo('App\Author');
     }
 
-<<<<<<< HEAD
+
     public function order()
     {
         return $this->belongsToMany('App\Order');
     }
 
-
-   
-
-
-
-
-=======
      public $timestamps = false;
->>>>>>> 787e14e4884fc87fe9bb03b5139e563623e0fff4
+
 }

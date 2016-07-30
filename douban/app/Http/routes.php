@@ -20,11 +20,17 @@ Route::post('/admin/login','AdminController@adoLogin');
 
 /*******  前台 ********/
 Route::get('/cate','CateController@index');//分类
+Route::get('/cate/hot','CateController@hot');
+
 Route::get('/login','UserController@login');
 Route::post('/login','UserController@dologin');
 //注册
 Route::get('/register','UserController@register');
 Route::post('/register','UserController@doregister');
+//我读
+Route::get('/mine/{id}','UserController@Mine');
+
+
 Route::get('/account','UserController@account')->middleware('login');
 Route::post('/account','UserController@doaccount')->middleware('login');
 Route::get('/suicide','UserController@suicide')->middleware('login');
@@ -42,6 +48,8 @@ Route::get('/subject/{id}','BookController@show');
 //图书列表页面
 Route::get('/tag','BookController@tag');
 Route::get('/tags','BookController@tags');
+//ajax添加购物车
+Route::get('/getCart','CartController@getCart');
 
 Route::group(['middleware'=>'login'],function(){
 	//后台首页
@@ -68,4 +76,35 @@ Route::group(['middleware'=>'login'],function(){
 	Route::get('/getProvince','OrderController@getProvince');
 	// 获取市区的信息
 	Route::get('/getCity','OrderController@getCity');
+
+/******* 前台 ********/
+	//账号管理
+    Route::get('/account','UserController@account');
+    Route::post('/account','UserController@doaccount');
+    Route::get('/suicide','UserController@suicide');
+    Route::post('/suicide','UserController@dosuicide');
+    Route::get('/upimage','UserController@upimage');
+	//我读
+	Route::get('/wodu/{id}','ReadbookController@wodu');
+	Route::get('/duguo/{id}','ReadbookController@duguo');
+	Route::get('/zaidu/{id}','ReadbookController@zaidu');
+	Route::get('/shanchu','ReadbookController@xiangdu');
+	//动态
+	Route::get('/dongtai/{id}','ReadbookController@dongtai');
+	//站内信
+	Route::get('/to/{id}','UserController@zhanneixin');
+	//所有关注的人
+	Route::get('/people/{id}','AttentionController@people');
+	//购物车页面
+	Route::get('/cart','CartController@cart');
+	//购物车操作
+	Route::get('/getDelete','CartController@getDelete');
+	//添加收货地址
+	Route::post('/insetAddress','CartController@insetAddress');
+	//创建订单地址
+	Route::post('/Order/create','OrderController@create');
+
+	Route::get('/Order/changeStatus','OrderController@changeStatus');
+	//订单详情
+	Route::get('/ordercart','OrderController@ordercart');
 });

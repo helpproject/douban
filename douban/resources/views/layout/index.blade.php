@@ -369,7 +369,7 @@
           <li>
             <a href="/cate">分类浏览</a></li>
           <li class="book-cart ">
-            <a href="">购书单</a></li>
+            <a href="/cate">购书单</a></li>
           <li>
             <a href="">电子图书</a></li>
           <li>

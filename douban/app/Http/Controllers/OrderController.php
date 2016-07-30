@@ -7,13 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Area;
 use App\Order;
-<<<<<<< HEAD
+
 use App\Books;
 use App\User;
 use Config;
 use App\OrderGoods;
-=======
->>>>>>> 787e14e4884fc87fe9bb03b5139e563623e0fff4
+
 use DB;
 use App\Http\Requests\OrderControllerRequest;// 地址插入验证
 use App\Http\Controllers\Controller;
@@ -167,7 +166,7 @@ class OrderController extends Controller
             return back()->with('error','删除失败');
         }
     }
-<<<<<<< HEAD
+
 
     //添加订单
     public function create(Request $request)
@@ -239,6 +238,5 @@ class OrderController extends Controller
             ]);       
     }
 
-=======
->>>>>>> 787e14e4884fc87fe9bb03b5139e563623e0fff4
+
 }
